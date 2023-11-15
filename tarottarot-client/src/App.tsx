@@ -1,21 +1,17 @@
 import React from 'react'
-import { Header } from './design/Header.tsx';
-
-//@ts-ignore
-import logo from './logo.svg';
 import './App.css';
+
 import { Signature } from './design/Logo.tsx';
+import Header from './design/Header.tsx';
+import Screen from './design/Screen.tsx';
 
 
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <header className="App-header">
+      <Screen>
         <Signature />
-      </header>
-    </div>
+      </Screen>
   );
 }
 

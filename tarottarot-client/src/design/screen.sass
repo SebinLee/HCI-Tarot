@@ -1,0 +1,27 @@
+@use "theme"
+
+@mixin Screen-Wrapper
+    display: flex
+    height: 100dvh
+    flex-direction: column
+
+@mixin Screen-Padding
+    padding: theme.$padding-inner
+
+.Screen-Wrapper-NoHeader
+    @include Screen-Wrapper
+    
+.Screen-Wrapper-Header
+    @include Screen-Wrapper
+    padding-top: theme.$large
+
+.ScreenFixed
+    flex:1
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    
+    @include Screen-Padding
+
+.ScreenOverflow
+    @include Screen-Padding
