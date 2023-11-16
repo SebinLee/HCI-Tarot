@@ -1,16 +1,17 @@
 import React from 'react'
 import './header.sass'
 import { Logo, Logotype } from './Logo.tsx'
+import { Link } from 'react-router-dom'
 
 //@ts-ignore
 import DayeKim from '../tmp/DayeKim.png'
 
 function Profile({image, name}) {
     return (
-        <a className="Profile" href={"http://localhost:3000"}>
+        <Link className="Profile" to="/mypage">
             <img src={image} />
             <p>{name}</p>
-        </a>
+        </Link>
     )
 }
 

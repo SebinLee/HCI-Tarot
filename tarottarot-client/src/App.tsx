@@ -1,17 +1,15 @@
 import React from 'react'
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
 
-import { Signature } from './design/Logo.tsx';
-import Header from './design/Header.tsx';
-import Screen from './design/Screen.tsx';
+import Start from './screen/Start.tsx'
 
 
 
 function App() {
   return (
-      <Screen>
-        <Signature />
-      </Screen>
+      <Routes>
+        <Route path="/" element={<Start />} />
+      </Routes>
   );
 }
 
