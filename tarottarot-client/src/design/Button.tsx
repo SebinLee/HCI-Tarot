@@ -1,21 +1,22 @@
 import React from 'react'
+import {ButtonProps} from './Inputs.type'
 import './button.sass'
 
-function Button({bordered=true, round=false, flex=true, size="S", ...props}) {
+function Button({children, onClick, bordered=false, round=false, flex=true, size="S"}: ButtonProps) {
     return (
         <a
             role="button"
-            onClick={props.onClick}
+            onClick={onClick}
             className={
                 `${flex? "Flex" : ""}
                 ${bordered ? "Bordered" : "Filled"} 
                 Button-${size.toUpperCase()}${round ? "R" : ""}`
             } 
-            {...props}
         >
-            {props.children}
+            {children}
         </a>
     )
 }
+
 
 export default Button

@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
+import {InputProps} from './Inputs.type'
 import './input.sass'
 
-export default function Input({text, setText, bordered=true, round=false, flex=true, size="S", ...props}) {
+export default function Input({text, setText, bordered=true, round=false, flex=true, size="S"}: InputProps) {
+    [text, setText] = useState("")
     return (
         <div className="Flex">
             <textarea
