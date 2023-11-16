@@ -1,0 +1,109 @@
+@use 'theme'
+
+@mixin button-base($size)
+    align-items: center
+    justify-content: center
+
+
+
+    font-size: $size
+    padding: $size * 0.7
+
+@mixin button-flex
+    flex: 1
+    display: flex
+    
+.Flex
+    @include button-flex
+
+.Bordered
+    border-style: solid
+    border-width: 1px
+    border-color: theme.$color-primary
+    background-color: theme.$color-white
+    color: theme.$color-primary
+
+.Filled
+    color: theme.$color-white
+    background-color: theme.$color-primary
+
+.Button-S
+    @include button-base(theme.$small)
+    border-radius: theme.$small/2
+
+.Button-SR
+    @include button-base(theme.$small)
+    border-radius: theme.$small * 2
+
+.Button-M
+    @include button-base(theme.$medium / 2)
+    border-radius: theme.$medium / 4
+
+.Button-MR
+    @include button-base(theme.$medium / 2)
+    border-radius: theme.$medium
+
+.Button-L
+    @include button-base(theme.$large / 2)
+    border-radius: theme.$large / 4
+
+.Button-LR
+    @include button-base(theme.$large / 2)
+    border-radius: theme.$large
+
+
+    
+// .Button-Flex-S
+//     @include button-flex
+//     @include button-base(theme.$small)
+//     border-radius: theme.$small/2
+
+// .Button-Flex-SR
+//     @include button-flex
+//     @include button-base(theme.$small)
+//     border-radius: theme.$small * 2
+
+// .Button-Flex-M
+//     @include button-flex
+//     @include button-base(theme.$medium / 2)
+//     border-radius: theme.$medium / 4
+
+// .Button-Flex-MR
+//     @include button-flex
+//     @include button-base(theme.$medium / 2)
+//     border-radius: theme.$medium
+
+// .Button-Flex-L
+//     @include button-flex
+//     @include button-base(theme.$large / 2)
+//     border-radius: theme.$large / 4
+
+// .Button-Flex-LR
+//     @include button-flex
+//     @include button-base(theme.$large / 2)
+//     border-radius: theme.$large
+
+// .Button-Fixed-S
+//     @include button-base(theme.$small)
+//     border-radius: theme.$small/2
+
+// .Button-Fixed-SR
+//     @include button-base(theme.$small)
+//     border-radius: theme.$small * 2
+
+// .Button-Fixed-M
+//     @include button-base(theme.$medium / 2)
+//     border-radius: theme.$medium / 4
+
+// .Button-Fixed-MR
+//     @include button-base(theme.$medium / 2)
+//     border-radius: theme.$medium
+
+// .Button-Fixed-L
+//     @include button-base(theme.$large / 2)
+//     border-radius: theme.$large / 4
+
+// .Button-Fixed-LR
+//     @include button-base(theme.$large / 2)
+//     border-radius: theme.$large
+
