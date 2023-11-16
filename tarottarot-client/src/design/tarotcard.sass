@@ -1,0 +1,19 @@
+@use "theme"
+
+$tarot-unit-small: 10dvw
+$tarot-unit-medium: 20dvw
+$tarot-unit-large: 30dvw
+$tarot-ratio: calc(12/7)
+
+@mixin tarot-card($size)
+    width: $size
+    height: $size * $tarot-ratio
+
+.TarotCard-S
+    @include tarot-card($tarot-unit-small)
+
+.TarotCard-M
+    @include tarot-card($tarot-unit-medium)
+
+.TarotCard-L
+    @include tarot-card($tarot-unit-large)
