@@ -4,8 +4,6 @@
     align-items: center
     justify-content: center
 
-
-
     font-size: $size
     padding: $size * 0.7
 
@@ -28,82 +26,25 @@
     background-color: theme.$color-primary
 
 .Button-S
-    @include button-base(theme.$small)
-    border-radius: theme.$small/2
+    @include button-base(theme.$button-small)
+    border-radius: calc(theme.$button-small/2)
 
 .Button-SR
-    @include button-base(theme.$small)
-    border-radius: theme.$small * 2
+    @include button-base(theme.$button-small)
+    border-radius: theme.$button-small * 2
 
 .Button-M
-    @include button-base(theme.$medium / 2)
-    border-radius: theme.$medium / 4
+    @include button-base(theme.$button-medium)
+    border-radius: calc(theme.$button-medium / 2)
 
 .Button-MR
-    @include button-base(theme.$medium / 2)
-    border-radius: theme.$medium
+    @include button-base(theme.$button-medium)
+    border-radius: theme.$button-medium * 2
 
 .Button-L
-    @include button-base(theme.$large / 2)
-    border-radius: theme.$large / 4
+    @include button-base(theme.$button-large)
+    border-radius: calc(theme.$button-large/2)
 
 .Button-LR
-    @include button-base(theme.$large / 2)
-    border-radius: theme.$large
-
-
-    
-// .Button-Flex-S
-//     @include button-flex
-//     @include button-base(theme.$small)
-//     border-radius: theme.$small/2
-
-// .Button-Flex-SR
-//     @include button-flex
-//     @include button-base(theme.$small)
-//     border-radius: theme.$small * 2
-
-// .Button-Flex-M
-//     @include button-flex
-//     @include button-base(theme.$medium / 2)
-//     border-radius: theme.$medium / 4
-
-// .Button-Flex-MR
-//     @include button-flex
-//     @include button-base(theme.$medium / 2)
-//     border-radius: theme.$medium
-
-// .Button-Flex-L
-//     @include button-flex
-//     @include button-base(theme.$large / 2)
-//     border-radius: theme.$large / 4
-
-// .Button-Flex-LR
-//     @include button-flex
-//     @include button-base(theme.$large / 2)
-//     border-radius: theme.$large
-
-// .Button-Fixed-S
-//     @include button-base(theme.$small)
-//     border-radius: theme.$small/2
-
-// .Button-Fixed-SR
-//     @include button-base(theme.$small)
-//     border-radius: theme.$small * 2
-
-// .Button-Fixed-M
-//     @include button-base(theme.$medium / 2)
-//     border-radius: theme.$medium / 4
-
-// .Button-Fixed-MR
-//     @include button-base(theme.$medium / 2)
-//     border-radius: theme.$medium
-
-// .Button-Fixed-L
-//     @include button-base(theme.$large / 2)
-//     border-radius: theme.$large / 4
-
-// .Button-Fixed-LR
-//     @include button-base(theme.$large / 2)
-//     border-radius: theme.$large
-
+    @include button-base(theme.$button-large)
+    border-radius: theme.$button-large * 2

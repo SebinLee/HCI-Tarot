@@ -1,0 +1,43 @@
+@use 'theme'
+
+@mixin Input-Base($size)
+    font-size: $size
+    padding: $size * 0.7
+
+    border-style: solid
+    border-width: 1px
+    border-color: theme.$color-primary
+    background-color: theme.$color-white
+    color: theme.$color-primary
+
+@mixin Input-Flex
+    flex: 1
+    display: flex
+
+    
+.Flex
+    @include Input-Flex
+
+.Input-S
+    @include Input-Base(theme.$button-small)
+    border-radius: calc(theme.$button-small/2)
+
+.Input-SR
+    @include Input-Base(theme.$button-small)
+    border-radius: theme.$button-small * 2
+
+.Input-M
+    @include Input-Base(theme.$button-medium)
+    border-radius: calc(theme.$button-medium / 2)
+
+.Input-MR
+    @include Input-Base(theme.$button-medium)
+    border-radius: theme.$button-medium * 2
+
+.Input-L
+    @include Input-Base(theme.$button-large)
+    border-radius: calc(theme.$button-large/2)
+
+.Input-LR
+    @include Input-Base(theme.$button-large)
+    border-radius: theme.$button-large * 2

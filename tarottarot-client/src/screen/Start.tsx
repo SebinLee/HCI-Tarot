@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Screen from '../design/Screen.tsx'
 import {Signature} from '../design/Logo.tsx'
 import Button from '../design/Button.tsx'
+import Input from '../design/Input.tsx'
+
 
 function Start() {
+    const [text, setText] = useState("")
+
     return (
         <Screen header={true}>
             <Signature />
@@ -11,6 +15,7 @@ function Start() {
             <Button onClick={() => {alert("안녕하세요")}}>
                 testtestsetsetset
             </Button>
+            <Input text={text} setText={setText} className={"Flex Input-L"}/>
         </Screen>
     )
 }
