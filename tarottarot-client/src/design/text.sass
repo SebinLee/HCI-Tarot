@@ -1,0 +1,46 @@
+@use 'theme'
+
+@mixin text-size($size)
+    font-size: $size
+
+@mixin text-color($color)
+    color: $color
+
+.Font-S
+    @include text-size(theme.$small)
+
+.Font-M
+    @include text-size(theme.$medium)
+
+.Font-L
+    @include text-size(theme.$large)
+
+.Font-XL
+    @include text-size(theme.$xlarge)
+
+.Font-XL
+    @include text-size(theme.$xxlarge)
+
+.Font-primary
+    @include text-color(theme.$color-primary)
+
+.Font-black
+    @include text-color(theme.$color-black)
+
+.Font-white
+    @include text-color(theme.$color-white)
+
+.Font-bold
+    font-weight: 500
+
+.Font-left
+    text-align: left
+
+.Font-center
+    text-align: center
+
+.Font-right
+    text-align: right
+
+
+
