@@ -24,7 +24,7 @@ function App(): JSX.Element {
       <SafeAreaProvider>
         <IconRegistry icons={EvaIconsPack} />
         <ApplicationProvider {...eva} theme={eva.light}>
-            <Screen title="하나둘셋넷" navigationLeftProp={NavigationPropEnum.back}>
+            <Screen title="하나둘셋넷" navigationLeftProp={NavigationPropEnum.back} navigationRightProp={NavigationPropEnum.profile}>
               <StyledButton disabled={false} text={"Testeasdfasdfasdf"} size={ButtonSize.M}/>
             </Screen>
           </ApplicationProvider>

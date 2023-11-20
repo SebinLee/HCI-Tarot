@@ -4,6 +4,7 @@ import { Typography, TypographyType } from "../Typography";
 import { Icon } from "@ui-kitten/components";
 import { NavigationIconProp, NavigationPropEnum } from "./LayoutInterface";
 import Color from "../Color";
+import FastImage from "react-native-fast-image";
 
 export default function NavigationBarProp({
     prop,
@@ -44,7 +45,14 @@ export default function NavigationBarProp({
 
 const Profile = ({ color=Color.Black }) => (
     <View style={styles.profileContainer}>
-        {/* <ProfileImageSBase blurRadius={0} profilePic={getUserProfilePic()} /> */}
+        <FastImage
+            source={{ uri: "https://avatars.githubusercontent.com/u/44885477?v=4" }}
+            style={{
+                width: 40,
+                height: 40,
+                borderRadius: 20
+            }}
+        />
         <Typography type={TypographyType.H3} style={styles.marginLeft} color={color}>
             Testasdfasdf
         </Typography>
