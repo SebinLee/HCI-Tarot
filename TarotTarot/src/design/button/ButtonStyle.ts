@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
+import Color from "../Color";
 
-const ButtonStyle = StyleSheet.create({
+export const ButtonStyle = StyleSheet.create({
     buttonL: {
         height: 45,
         borderRadius: 4,
@@ -37,4 +38,24 @@ const ButtonStyle = StyleSheet.create({
     },
 });
 
-export default ButtonStyle;
+export const ButtonColor = {
+    SolidDisabled: {
+        Button: Color.Primary_light,
+        Text: Color.White,
+    },
+
+    SolidEnabled: {
+        Button: Color.Primary,
+        Text: Color.White,
+    },
+
+    OutlineDisabled: {
+        Button: Color.Primary_light,
+        Text: Color.Primary_light,
+    },
+
+    OutlineEnabled: {
+        Button: Color.Primary,
+        Text: Color.Primary,
+    },
+};
