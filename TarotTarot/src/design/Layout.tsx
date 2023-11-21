@@ -6,7 +6,6 @@ import NavigationBarBase from "./layout/NavigationBarBase";
 import StatusBarBase from "./layout/StatusBarBase";
 import Color from "./Color";
 
-
 export function Screen({
     title = "",
     horizontalPadding = true,
@@ -19,13 +18,14 @@ export function Screen({
             style={{
                 width: Dimensions.get("screen").width,
                 height: Dimensions.get("screen").height,
-                paddingTop: Platform.OS === "android" ? getStatusBarHeight() : 0,
+                paddingTop:
+                    Platform.OS === "android" ? getStatusBarHeight() : 0,
                 paddingBottom: Platform.OS === "android" ? 48 : 0,
                 backgroundColor,
             }}
         >
-            <StatusBarBase/>
-            {title  && <NavigationBarBase title={title} {...props}/>}
+            <StatusBarBase />
+            {title && <NavigationBarBase title={title} {...props} />}
             <View
                 style={{
                     flex: 1,
@@ -34,9 +34,7 @@ export function Screen({
                         : 0,
                 }}
             >
-                <SafeAreaView style={{ flex: 1 }}>
-                    {children}
-                </SafeAreaView>
+                <SafeAreaView style={{ flex: 1 }}>{children}</SafeAreaView>
             </View>
         </View>
     );

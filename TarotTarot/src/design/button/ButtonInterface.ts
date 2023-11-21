@@ -6,8 +6,11 @@ import {
     TextStyle,
 } from "react-native";
 
-
-export enum ButtonSize {S, M, L}
+export enum ButtonSize {
+    S,
+    M,
+    L,
+}
 
 export interface ButtonProps extends TouchableOpacityProps {
     size: ButtonSize;

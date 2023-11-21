@@ -1,16 +1,13 @@
-import React from 'react'
-import * as RN from 'react-native'
-import Color from './Color';
+import React from "react";
+import * as RN from "react-native";
+import Color from "./Color";
 
 interface TextInputBaseProp extends RN.TextInputProps {
     AccessoryRight?: React.ElementType;
 }
 
 const TextInput = React.forwardRef(
-    (
-        { AccessoryRight, style, ...props }: TextInputBaseProp,
-        ref: any
-    ) => {
+    ({ AccessoryRight, style, ...props }: TextInputBaseProp, ref: any) => {
         return (
             <RN.View
                 style={[
@@ -29,7 +26,7 @@ const TextInput = React.forwardRef(
                 {AccessoryRight && <AccessoryRight />}
             </RN.View>
         );
-    }
+    },
 );
 
-export default TextInput
+export default TextInput;

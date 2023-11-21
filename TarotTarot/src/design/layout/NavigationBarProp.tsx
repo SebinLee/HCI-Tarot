@@ -6,24 +6,17 @@ import { NavigationIconProp, NavigationPropEnum } from "./LayoutInterface";
 import Color from "../Color";
 import FastImage from "react-native-fast-image";
 
-export default function NavigationBarProp({
-    prop,
-    color,
-}: NavigationIconProp) {
+export default function NavigationBarProp({ prop, color }: NavigationIconProp) {
     switch (prop) {
         case NavigationPropEnum.profile:
             return <Profile color={color} />;
 
         case NavigationPropEnum.submit:
-            return <Submit />
+            return <Submit color={color} />;
 
         case NavigationPropEnum.close:
             return (
-                <Icon
-                    name="close-outline"
-                    fill={color}
-                    style={styles.icon}
-                />
+                <Icon name="close-outline" fill={color} style={styles.icon} />
             );
 
         case NavigationPropEnum.back:
@@ -49,14 +42,16 @@ export default function NavigationBarProp({
     }
 }
 
-const Profile = ({ color=Color.Black }) => (
+const Profile = ({ color = Color.Black }) => (
     <View style={styles.profileContainer}>
         <FastImage
-            source={{ uri: "https://avatars.githubusercontent.com/u/44885477?v=4" }}
+            source={{
+                uri: "https://avatars.githubusercontent.com/u/44885477?v=4",
+            }}
             style={{
                 width: 40,
                 height: 40,
-                borderRadius: 20
+                borderRadius: 20,
             }}
         />
         <Text type={TextType.H3} style={styles.marginLeft} color={color}>
@@ -65,11 +60,11 @@ const Profile = ({ color=Color.Black }) => (
     </View>
 );
 
-const Submit = ({color=Color.Primary}) => (
+const Submit = ({ color = Color.Primary }) => (
     <Text type={TextType.H3} color={color}>
         등록
     </Text>
-)
+);
 
 const styles = StyleSheet.create({
     message: {

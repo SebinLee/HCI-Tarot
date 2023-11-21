@@ -6,7 +6,6 @@ import NavigationBarProp from "./NavigationBarProp";
 import { Text, TextType } from "../Text";
 import Color from "../Color";
 
-
 export default function NavigationBarBase({
     title = "",
     navigationLeftProp = NavigationPropEnum.back,
@@ -78,8 +77,12 @@ export default function NavigationBarBase({
             alignment="center"
             accessoryLeft={LeftButton}
             accessoryRight={RightButton}
-            title={() => <Text type={TextType.H2} color={navigationPropColor}>{title}</Text>}
-            style={{backgroundColor: Color.White}}
+            title={() => (
+                <Text type={TextType.H2} color={navigationPropColor}>
+                    {title}
+                </Text>
+            )}
+            style={{ backgroundColor: Color.White }}
         />
     );
 }

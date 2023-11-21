@@ -1,13 +1,12 @@
-import React from 'react'
+import React from "react";
 import {
     createStackNavigator,
     StackNavigationOptions,
-    TransitionPresets
-} from "@react-navigation/stack"
-import Start from './src/screen/Start';
+    TransitionPresets,
+} from "@react-navigation/stack";
+import Start from "./src/screen/Start";
 
 export default function Routes() {
-
     // Create StackNavigator
     const Stack = createStackNavigator();
 
@@ -19,8 +18,7 @@ export default function Routes() {
         headerShown: false,
     };
 
-
-    return(
+    return (
         <Stack.Navigator screenOptions={TransitionScreenOptions}>
             <Stack.Screen
                 name="Start"
@@ -28,7 +26,5 @@ export default function Routes() {
                 options={screenOption}
             />
         </Stack.Navigator>
-    )
-
-    
+    );
 }

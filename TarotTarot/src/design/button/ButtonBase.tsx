@@ -14,20 +14,26 @@ export default function ButtonBase({
     ...props
 }: ButtonProps) {
     const getButtonBaseStyle = () => {
-        switch(size) {
-            case ButtonSize.S: return ButtonStyle.buttonS
-            case ButtonSize.M: return ButtonStyle.buttonM
-            case ButtonSize.L: return ButtonStyle.buttonL
+        switch (size) {
+            case ButtonSize.S:
+                return ButtonStyle.buttonS;
+            case ButtonSize.M:
+                return ButtonStyle.buttonM;
+            case ButtonSize.L:
+                return ButtonStyle.buttonL;
         }
-    }
+    };
 
     const getTextType = () => {
-        switch(size) {
-            case ButtonSize.S: return TextType.ButtonS
-            case ButtonSize.M: return TextType.ButtonM
-            case ButtonSize.L: return TextType.ButtonL
+        switch (size) {
+            case ButtonSize.S:
+                return TextType.ButtonS;
+            case ButtonSize.M:
+                return TextType.ButtonM;
+            case ButtonSize.L:
+                return TextType.ButtonL;
         }
-    }
+    };
 
     return (
         <TouchableOpacity
