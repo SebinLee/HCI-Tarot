@@ -6,7 +6,7 @@ import NavigationBarBase from "./layout/NavigationBarBase";
 import StatusBarBase from "./layout/StatusBarBase";
 import Color from "./Color";
 
-export function Screen({
+export default function Screen({
     title = "",
     horizontalPadding = true,
     backgroundColor = Color.White,
