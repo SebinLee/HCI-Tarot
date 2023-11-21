@@ -7,6 +7,7 @@ enum Color {
     Secondary_dark = "#3e7a71",
     Black = "#000000",
     White = "#ffffff",
+    Gray = "#A5A4A4",
 }
 
 export default Color;
