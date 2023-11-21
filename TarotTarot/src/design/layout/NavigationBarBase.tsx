@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { TopNavigation, TopNavigationAction } from "@ui-kitten/components";
 import { NavigationBaseProp, NavigationPropEnum } from "./LayoutInterface";
 import NavigationBarProp from "./NavigationBarProp";
-import { Typography, TypographyType } from "../Typography";
+import { Text, TextType } from "../Text";
 import Color from "../Color";
 
 
@@ -88,7 +88,7 @@ export default function NavigationBarBase({
             alignment="center"
             accessoryLeft={LeftButton}
             accessoryRight={RightButton}
-            title={() => <Typography type={TypographyType.H3} color={navigationPropColor}>{title}</Typography>}
+            title={() => <Text type={TextType.H3} color={navigationPropColor}>{title}</Text>}
             style={{backgroundColor: Color.White}}
         />
     );

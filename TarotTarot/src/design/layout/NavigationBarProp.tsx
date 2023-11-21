@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { Typography, TypographyType } from "../Typography";
+import { Text, TextType } from "../Text";
 import { Icon } from "@ui-kitten/components";
 import { NavigationIconProp, NavigationPropEnum } from "./LayoutInterface";
 import Color from "../Color";
@@ -53,9 +53,9 @@ const Profile = ({ color=Color.Black }) => (
                 borderRadius: 20
             }}
         />
-        <Typography type={TypographyType.H3} style={styles.marginLeft} color={color}>
+        <Text type={TextType.H3} style={styles.marginLeft} color={color}>
             Testasdfasdf
-        </Typography>
+        </Text>
     </View>
 );
 

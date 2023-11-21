@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import { ButtonProps, ButtonSize } from "./ButtonInterface";
-import { Typography, TypographyType } from "../Typography";
+import { Text, TextType } from "../Text";
 import { ButtonStyle } from "./ButtonStyle";
 
 export default function ButtonBase({
@@ -21,11 +21,11 @@ export default function ButtonBase({
         }
     }
 
-    const getTypographyType = () => {
+    const getTextType = () => {
         switch(size) {
-            case ButtonSize.S: return TypographyType.ButtonS
-            case ButtonSize.M: return TypographyType.ButtonM
-            case ButtonSize.L: return TypographyType.ButtonL
+            case ButtonSize.S: return TextType.ButtonS
+            case ButtonSize.M: return TextType.ButtonM
+            case ButtonSize.L: return TextType.ButtonL
         }
     }
 
@@ -35,9 +35,9 @@ export default function ButtonBase({
             disabled={disabled}
             {...props}
         >
-            <Typography style={textStyle} color={textColor} type={getTypographyType()}>
+            <Text style={textStyle} color={textColor} type={getTextType()}>
                 {text}
-            </Typography>
+            </Text>
         </TouchableOpacity>
     );
 }

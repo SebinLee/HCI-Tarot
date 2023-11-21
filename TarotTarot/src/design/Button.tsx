@@ -3,7 +3,7 @@ import ButtonBase from "./button/ButtonBase";
 import { ButtonColor } from "./button/ButtonStyle";
 import { ButtonProps } from "./button/ButtonInterface";
 
-export default function StyledButton({disabled, buttonStyle, ...props }: ButtonProps) {
+export default function Button({disabled, buttonStyle, ...props }: ButtonProps) {
     return (
         <ButtonBase
             {...props}
