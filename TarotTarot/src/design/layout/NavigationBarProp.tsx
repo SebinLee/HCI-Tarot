@@ -9,15 +9,21 @@ import FastImage from "react-native-fast-image";
 export default function NavigationBarProp({
     prop,
     color,
-    onPress,
 }: NavigationIconProp) {
     switch (prop) {
         case NavigationPropEnum.profile:
             return <Profile color={color} />;
 
+        case NavigationPropEnum.submit:
+            return <Submit />
+
         case NavigationPropEnum.close:
             return (
-                <Icon name="close-outline" fill={color} style={styles.icon} />
+                <Icon
+                    name="close-outline"
+                    fill={color}
+                    style={styles.icon}
+                />
             );
 
         case NavigationPropEnum.back:
@@ -58,6 +64,12 @@ const Profile = ({ color=Color.Black }) => (
         </Text>
     </View>
 );
+
+const Submit = ({color=Color.Primary}) => (
+    <Text type={TextType.H3} color={color}>
+        등록
+    </Text>
+)
 
 const styles = StyleSheet.create({
     message: {

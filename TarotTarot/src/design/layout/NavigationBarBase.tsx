@@ -26,7 +26,7 @@ export default function NavigationBarBase({
                 break;
 
             case NavigationPropEnum.profile:
-                //@ts-ignore
+                // @ts-ignore
                 navigation.navigate("profile", { routeParam: "profile" });
                 break;
 
@@ -43,11 +43,6 @@ export default function NavigationBarBase({
                     <NavigationBarProp
                         prop={navigationLeftProp}
                         color={navigationPropColor}
-                        onPress={() => {
-                            onLeftPropPress
-                                ? onLeftPropPress()
-                                : defaultFunction(navigationLeftProp);
-                        }}
                     />
                 )}
                 onPress={() => {
@@ -67,11 +62,6 @@ export default function NavigationBarBase({
                     <NavigationBarProp
                         prop={navigationRightProp}
                         color={navigationPropColor}
-                        onPress={() => {
-                            onRightPropPress
-                                ? onRightPropPress()
-                                : defaultFunction(navigationRightProp);
-                        }}
                     />
                 )}
                 onPress={() => {
@@ -88,7 +78,7 @@ export default function NavigationBarBase({
             alignment="center"
             accessoryLeft={LeftButton}
             accessoryRight={RightButton}
-            title={() => <Text type={TextType.H3} color={navigationPropColor}>{title}</Text>}
+            title={() => <Text type={TextType.H2} color={navigationPropColor}>{title}</Text>}
             style={{backgroundColor: Color.White}}
         />
     );

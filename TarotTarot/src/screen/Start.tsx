@@ -12,7 +12,12 @@ export default function Start() {
     const [text, setText] = useState("")
 
     return (
-        <Screen title="test" navigationLeftProp={NavigationPropEnum.back} navigationRightProp={NavigationPropEnum.close}>
+        <Screen
+            title="test"
+            navigationLeftProp={NavigationPropEnum.back}
+            navigationRightProp={NavigationPropEnum.submit}
+            onRightPropPress={() => {console.log("Testtest")}}
+        >
             <View>
                 <FastImage
                     source={require('../design/assets/logo-primary.png')}

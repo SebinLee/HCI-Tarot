@@ -19,7 +19,6 @@ export interface ScreenProp extends NavigationBaseProp {
 export interface NavigationIconProp {
     prop: NavigationPropEnum;
     color?: Color;
-    onPress?: () => void;
 }
 
 export enum NavigationPropEnum {
@@ -28,4 +27,5 @@ export enum NavigationPropEnum {
     more,
     close,
     profile,
+    submit,
 }
