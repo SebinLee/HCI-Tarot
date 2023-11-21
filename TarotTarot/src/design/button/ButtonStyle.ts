@@ -10,7 +10,7 @@ export const ButtonStyle = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-
+    
     buttonM: {
         height: 38,
         borderRadius: 4,
