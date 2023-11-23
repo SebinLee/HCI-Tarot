@@ -1,5 +1,6 @@
 #import "AppDelegate.h"
 #import <Firebase.h>
+#import <GoogleSignIn/GoogleSignIn.h>
 
 #import <React/RCTBundleURLProvider.h>
 
@@ -25,6 +26,10 @@
 #else
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(nonnull NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options {
+  return [GIDSignIn.sharedInstance handleURL:url];
 }
 
 @end

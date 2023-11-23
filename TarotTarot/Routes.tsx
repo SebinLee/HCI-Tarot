@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     createStackNavigator,
     StackNavigationOptions,
     TransitionPresets,
 } from "@react-navigation/stack";
-import Start from "./src/screen/Start";
+import { CommonActions, useNavigation } from "@react-navigation/native";
+import auth from "@react-native-firebase/auth";
 import MainRoutes from "./src/screen/MainRoutes";
+import Start from "./src/screen/Start";
 
 export default function Routes() {
     // Create StackNavigator
     const Stack = createStackNavigator();
+    const navigation = useNavigation();
 
     const TransitionScreenOptions = {
         ...TransitionPresets.SlideFromRightIOS, // This is where the transition happens
@@ -19,16 +22,36 @@ export default function Routes() {
         headerShown: false,
     };
 
+    // Handle firebase Auth
+    const onAuthStateChanged = (user: any) => {
+        console.log(user);
+        if (user) {
+            navigation.dispatch(
+                CommonActions.reset({
+                    index: 1,
+                    routes: [
+                        { name: "MainRoutes", params: { routeParam: "front" } },
+                    ],
+                }),
+            );
+        }
+    };
+
+    useEffect(() => {
+        const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+        return subscriber;
+    });
+
     return (
         <Stack.Navigator screenOptions={TransitionScreenOptions}>
             <Stack.Screen
-                name="MainRoutes"
-                component={MainRoutes}
+                name="Start"
+                component={Start}
                 options={screenOption}
             />
             <Stack.Screen
-                name="Start"
-                component={Start}
+                name="MainRoutes"
+                component={MainRoutes}
                 options={screenOption}
             />
         </Stack.Navigator>
