@@ -5,6 +5,7 @@ import {
     TransitionPresets,
 } from "@react-navigation/stack";
 import Start from "./src/screen/Start";
+import MainRoutes from "./src/screen/MainRoutes";
 
 export default function Routes() {
     // Create StackNavigator
@@ -20,6 +21,11 @@ export default function Routes() {
 
     return (
         <Stack.Navigator screenOptions={TransitionScreenOptions}>
+            <Stack.Screen
+                name="MainRoutes"
+                component={MainRoutes}
+                options={screenOption}
+            />
             <Stack.Screen
                 name="Start"
                 component={Start}
