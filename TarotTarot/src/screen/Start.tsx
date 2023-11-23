@@ -7,9 +7,12 @@ import { ButtonSize } from "../design/button/ButtonInterface";
 import { NavigationPropEnum } from "../design/layout/LayoutInterface";
 import TextInput from "../design/TextInput";
 import Chip, { ChipContainer } from "../design/Chip";
+import Modal from "../design/Modal";
+import { Text } from "../design/Text";
 
 export default function Start() {
     const [text, setText] = useState("");
+    const [visible, setVisible] = useState(false);
     const [selected, setSelected] = useState(false);
 
     return (
@@ -27,7 +30,11 @@ export default function Start() {
                     style={{ width: 120, height: 120, margin: 30 }}
                     resizeMode={FastImage.resizeMode.contain}
                 />
-                <Button size={ButtonSize.L} text="시작하기" />
+                <Button
+                    size={ButtonSize.L}
+                    text="시작하기"
+                    onPress={() => setVisible(true)}
+                />
                 <TextInput
                     value={text}
                     onChangeText={(text) => setText(text)}
@@ -35,30 +42,42 @@ export default function Start() {
                 />
                 <ChipContainer>
                     <Chip
-                        filled={false}
+                        filled={true}
                         text="test"
                         selected={selected}
                         onPress={() => {
                             setSelected(!selected);
                         }}
+                        showAccessoryRight={true}
                     />
                     <Chip
-                        filled={false}
+                        filled={true}
                         text="test"
                         selected={selected}
                         onPress={() => {
                             setSelected(!selected);
                         }}
+                        showAccessoryRight={true}
                     />
                     <Chip
-                        filled={false}
+                        filled={true}
                         text="test"
                         selected={selected}
                         onPress={() => {
                             setSelected(!selected);
                         }}
+                        showAccessoryRight={true}
                     />
                 </ChipContainer>
+                <Modal
+                    title="Modal Test"
+                    subtitle="asdkfadsfkjasl;fdkj;alksjdf;laksjdfl;kasdjfkl"
+                    visible={visible}
+                    setVisible={setVisible}
+                    renderClose={true}
+                >
+                    <Text>test</Text>
+                </Modal>
             </View>
         </Screen>
     );
