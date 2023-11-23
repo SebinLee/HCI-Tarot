@@ -6,7 +6,7 @@ import {
 } from "@react-navigation/stack";
 import { CommonActions, useNavigation } from "@react-navigation/native";
 import auth from "@react-native-firebase/auth";
-import MainRoutes from "./src/screen/MainRoutes";
+import MainContent from "./src/screen/MainContent";
 import Start from "./src/screen/Start";
 import Home from "./src/screen/Home";
 
@@ -50,8 +50,8 @@ export default function Routes() {
             />
             <Stack.Screen name="Home" component={Home} options={screenOption} />
             <Stack.Screen
-                name="MainRoutes"
-                component={MainRoutes}
+                name="MainContent"
+                component={MainContent}
                 options={screenOption}
             />
         </Stack.Navigator>

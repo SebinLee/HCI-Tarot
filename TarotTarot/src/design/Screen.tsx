@@ -8,6 +8,7 @@ import Color from "./Color";
 
 export default function Screen({
     title = "",
+    hideNavigationBar = false,
     horizontalPadding = true,
     backgroundColor = Color.White,
     children,
@@ -25,7 +26,9 @@ export default function Screen({
             }}
         >
             <StatusBarBase />
-            {title && <NavigationBarBase title={title} {...props} />}
+            {!hideNavigationBar && (
+                <NavigationBarBase title={title} {...props} />
+            )}
             <View
                 style={{
                     flex: 1,
