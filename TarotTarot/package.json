@@ -25,6 +25,7 @@
     "react-native-safearea-height": "^1.0.6",
     "react-native-screens": "^3.27.0",
     "react-native-svg": "^14.0.0",
+    "react-native-svg-transformer": "^1.1.0",
     "react-native-vector-icons": "^10.0.2"
   },
   "devDependencies": {

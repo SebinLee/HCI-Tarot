@@ -9,6 +9,7 @@ import TextInput from "../design/TextInput";
 import Chip, { ChipContainer } from "../design/Chip";
 import Modal from "../design/Modal";
 import { Text } from "../design/Text";
+import PostButton from "../design/PostButton";
 
 export default function Start() {
     const [text, setText] = useState("");
@@ -78,6 +79,11 @@ export default function Start() {
                 >
                     <Text>test</Text>
                 </Modal>
+                <PostButton
+                    onPress={() => {
+                        console.log("Post Pressed");
+                    }}
+                />
             </View>
         </Screen>
     );
