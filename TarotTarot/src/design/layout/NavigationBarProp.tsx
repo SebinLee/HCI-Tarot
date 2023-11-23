@@ -1,19 +1,20 @@
 import React from "react";
 import { Icon } from "@ui-kitten/components";
 import { View, StyleSheet } from "react-native";
-import { NavigationIconProp, NavigationPropEnum } from "./LayoutInterface";
 import { Text, TextType } from "../Text";
+import { NavigationIconProp, NavigationPropEnum } from "./LayoutInterface";
+import { useAppSelector } from "../../library/redux/ReduxStore";
 import FastImage from "react-native-fast-image";
 
 export default function NavigationBarProp({ prop, color }: NavigationIconProp) {
+    const { profilePic } = useAppSelector((state) => state.userInfo);
+
     switch (prop) {
         case NavigationPropEnum.profile:
             return (
                 <View style={styles.profileContainer}>
                     <FastImage
-                        source={{
-                            uri: "https://avatars.githubusercontent.com/u/44885477?v=4",
-                        }}
+                        source={{ uri: profilePic }}
                         style={{
                             width: 40,
                             height: 40,
