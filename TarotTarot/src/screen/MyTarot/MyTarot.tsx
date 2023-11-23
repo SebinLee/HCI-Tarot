@@ -5,7 +5,7 @@ import { Text } from "../../design/Text";
 export default function MyTarot() {
     return (
         <Screen title="MyTarot">
-            <Text>asdfasdfasdfsadf</Text>
+            <Text>qwertyterweqrteew</Text>
         </Screen>
     );
 }
