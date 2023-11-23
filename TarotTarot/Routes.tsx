@@ -8,6 +8,7 @@ import { CommonActions, useNavigation } from "@react-navigation/native";
 import auth from "@react-native-firebase/auth";
 import MainRoutes from "./src/screen/MainRoutes";
 import Start from "./src/screen/Start";
+import Home from "./src/screen/Home";
 
 export default function Routes() {
     // Create StackNavigator
@@ -29,9 +30,7 @@ export default function Routes() {
             navigation.dispatch(
                 CommonActions.reset({
                     index: 1,
-                    routes: [
-                        { name: "MainRoutes", params: { routeParam: "front" } },
-                    ],
+                    routes: [{ name: "Home", params: { routeParam: "front" } }],
                 }),
             );
         }
@@ -49,6 +48,7 @@ export default function Routes() {
                 component={Start}
                 options={screenOption}
             />
+            <Stack.Screen name="Home" component={Home} options={screenOption} />
             <Stack.Screen
                 name="MainRoutes"
                 component={MainRoutes}
