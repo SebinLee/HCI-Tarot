@@ -4,7 +4,10 @@ import {
     StackNavigationOptions,
     TransitionPresets,
 } from "@react-navigation/stack";
+import { useDispatch } from "react-redux";
 import { CommonActions, useNavigation } from "@react-navigation/native";
+import { storeUserInfo } from "./src/library/redux/UserInfoReducer";
+
 import auth from "@react-native-firebase/auth";
 import MainContent from "./src/screen/MainContent";
 import Start from "./src/screen/Start";
@@ -14,6 +17,7 @@ export default function Routes() {
     // Create StackNavigator
     const Stack = createStackNavigator();
     const navigation = useNavigation();
+    const dispatch = useDispatch();
 
     const TransitionScreenOptions = {
         ...TransitionPresets.SlideFromRightIOS, // This is where the transition happens
@@ -25,12 +29,19 @@ export default function Routes() {
 
     // Handle firebase Auth
     const onAuthStateChanged = (user: any) => {
-        console.log(user);
         if (user) {
             navigation.dispatch(
                 CommonActions.reset({
                     index: 1,
                     routes: [{ name: "Home", params: { routeParam: "front" } }],
+                }),
+            );
+
+            dispatch(
+                storeUserInfo({
+                    id: user.uid,
+                    username: user.displayName,
+                    profilePic: user.photoURL,
                 }),
             );
         }
