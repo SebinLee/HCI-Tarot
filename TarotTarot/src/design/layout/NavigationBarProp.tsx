@@ -1,18 +1,35 @@
 import React from "react";
+import { Icon } from "@ui-kitten/components";
 import { View, StyleSheet } from "react-native";
 import { Text, TextType } from "../Text";
-import { Icon } from "@ui-kitten/components";
 import { NavigationIconProp, NavigationPropEnum } from "./LayoutInterface";
-import Color from "../Color";
+import { useAppSelector } from "../../library/redux/ReduxStore";
 import FastImage from "react-native-fast-image";
 
 export default function NavigationBarProp({ prop, color }: NavigationIconProp) {
+    const { profilePic } = useAppSelector((state) => state.userInfo);
+
     switch (prop) {
         case NavigationPropEnum.profile:
-            return <Profile color={color} />;
+            return (
+                <View style={styles.profileContainer}>
+                    <FastImage
+                        source={{ uri: profilePic }}
+                        style={{
+                            width: 40,
+                            height: 40,
+                            borderRadius: 20,
+                        }}
+                    />
+                </View>
+            );
 
         case NavigationPropEnum.submit:
-            return <Submit color={color} />;
+            return (
+                <Text type={TextType.H3} color={color}>
+                    등록
+                </Text>
+            );
 
         case NavigationPropEnum.close:
             return (
@@ -41,30 +58,6 @@ export default function NavigationBarProp({ prop, color }: NavigationIconProp) {
             return null;
     }
 }
-
-const Profile = ({ color = Color.Black }) => (
-    <View style={styles.profileContainer}>
-        <FastImage
-            source={{
-                uri: "https://avatars.githubusercontent.com/u/44885477?v=4",
-            }}
-            style={{
-                width: 40,
-                height: 40,
-                borderRadius: 20,
-            }}
-        />
-        <Text type={TextType.H3} style={styles.marginLeft} color={color}>
-            Testasdfasdf
-        </Text>
-    </View>
-);
-
-const Submit = ({ color = Color.Primary }) => (
-    <Text type={TextType.H3} color={color}>
-        등록
-    </Text>
-);
 
 const styles = StyleSheet.create({
     message: {

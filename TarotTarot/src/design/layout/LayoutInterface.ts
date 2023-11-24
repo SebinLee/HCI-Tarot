@@ -14,6 +14,7 @@ export interface ScreenProp extends NavigationBaseProp {
     backgroundColor?: Color;
     children: React.ReactNode;
     horizontalPadding?: boolean;
+    hideNavigationBar?: boolean;
 }
 
 export interface NavigationIconProp {

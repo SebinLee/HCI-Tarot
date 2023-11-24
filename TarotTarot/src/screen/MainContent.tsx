@@ -12,16 +12,16 @@ const screenOption: BottomTabNavigationOptions = {
     headerShown: false,
 };
 
-export default function MainRoutes() {
+export default function MainContent() {
     return (
         <Tab.Navigator>
             <Tab.Screen
-                name="Home"
+                name="TarotForest"
                 component={TarotForest}
                 options={screenOption}
             />
             <Tab.Screen
-                name="Settings"
+                name="MyTarot"
                 component={MyTarot}
                 options={screenOption}
             />
