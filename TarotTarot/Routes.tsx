@@ -12,6 +12,7 @@ import auth from "@react-native-firebase/auth";
 import MainContent from "./src/screen/MainContent";
 import Start from "./src/screen/Start";
 import Home from "./src/screen/Home";
+import Chat from "./src/screen/Chat/Chat";
 
 export default function Routes() {
     // Create StackNavigator
@@ -30,12 +31,12 @@ export default function Routes() {
     // Handle firebase Auth
     const onAuthStateChanged = (user: any) => {
         if (user) {
-            navigation.dispatch(
-                CommonActions.reset({
-                    index: 1,
-                    routes: [{ name: "Home", params: { routeParam: "front" } }],
-                }),
-            );
+            // navigation.dispatch(
+            //     CommonActions.reset({
+            //         index: 1,
+            //         routes: [{ name: "Home", params: { routeParam: "front" } }],
+            //     }),
+            // );
 
             dispatch(
                 storeUserInfo({
@@ -54,6 +55,7 @@ export default function Routes() {
 
     return (
         <Stack.Navigator screenOptions={TransitionScreenOptions}>
+            <Stack.Screen name="Chat" component={Chat} options={screenOption} />
             <Stack.Screen
                 name="Start"
                 component={Start}
