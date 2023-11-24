@@ -24,6 +24,7 @@ const ChipFilled = ({
     text = "",
     selected = false,
     showAccessoryRight = false,
+    style,
     ...props
 }: ChipBaseProps) => (
     <TouchableOpacity
@@ -34,6 +35,7 @@ const ChipFilled = ({
                     ? ChipColor.SolidEnabled.Button
                     : ChipColor.SolidDisabled.Button,
             },
+            style,
         ]}
         {...props}
     >
@@ -57,6 +59,7 @@ const ChipOutlined = ({
     text = "",
     selected = false,
     showAccessoryRight = false,
+    style,
     ...props
 }: ChipBaseProps) => (
     <TouchableOpacity
@@ -68,6 +71,7 @@ const ChipOutlined = ({
                     ? ChipColor.OutlineEnabled.Button
                     : ChipColor.OutlineDisabled.Button,
             },
+            style,
         ]}
         {...props}
     >

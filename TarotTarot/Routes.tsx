@@ -56,12 +56,12 @@ export default function Routes() {
     return (
         <Stack.Navigator screenOptions={TransitionScreenOptions}>
             <Stack.Screen name="Chat" component={Chat} options={screenOption} />
+            <Stack.Screen name="Home" component={Home} options={screenOption} />
             <Stack.Screen
                 name="Start"
                 component={Start}
                 options={screenOption}
             />
-            <Stack.Screen name="Home" component={Home} options={screenOption} />
             <Stack.Screen
                 name="MainContent"
                 component={MainContent}
