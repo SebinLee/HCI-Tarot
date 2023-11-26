@@ -1,4 +1,7 @@
 {
-  "name": "TarotTarot",
-  "displayName": "TarotTarot"
+    "name": "TarotTarot",
+    "displayName": "TarotTarot",
+    "android": {
+        "softwareKeyboardLayoutMode": "pan"
+    }
 }

@@ -10,6 +10,7 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import { store, persistedStore } from "./src/library/redux/ReduxStore";
 import Routes from "./Routes";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 function App(): JSX.Element {
     return (
@@ -19,7 +20,9 @@ function App(): JSX.Element {
                     <SafeAreaProvider>
                         <IconRegistry icons={EvaIconsPack} />
                         <ApplicationProvider {...eva} theme={eva.light}>
-                            <Routes />
+                            <GestureHandlerRootView style={{ flex: 1 }}>
+                                <Routes />
+                            </GestureHandlerRootView>
                         </ApplicationProvider>
                     </SafeAreaProvider>
                 </NavigationContainer>

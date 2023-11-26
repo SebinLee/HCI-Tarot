@@ -1,27 +1,8 @@
-import React from "react";
-import { TextInputProps, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View } from "react-native";
 import Chip, { ChipContainer } from "../Chip";
-import TextInput from "../TextInput";
-
-export type ChatInputTypes = "Start" | "Draw" | "Hide" | "Input" | "End";
-interface ChatInputChipFunctions extends TextInputProps {
-    onPressStartA: () => void;
-    onPressStartB: () => void;
-    onPressDraw: () => void;
-    onPressEndA: () => void;
-    onPressEndB: () => void;
-}
-
-interface ChatInputTarotProps {
-    index: number;
-    keywords: string;
-}
-
-interface ChatInputProps extends TextInputProps, ChatInputChipFunctions {
-    type: ChatInputTypes;
-    // tarots: ChatInputTarotProps[];
-    // selectedTarots: number;
-}
+import ChatInputBottomSheet from "./ChatInputBottomSheet";
+import { ChatInputProps } from "./ChatInterface";
 
 export default function ChatInputProp({
     type = "End",
@@ -30,7 +11,6 @@ export default function ChatInputProp({
     onPressDraw,
     onPressEndA,
     onPressEndB,
-    // tarots,
     ...props
 }: ChatInputProps) {
     //@ts-ignore
@@ -81,6 +61,6 @@ export default function ChatInputProp({
             );
 
         case "Input":
-            return <TextInput {...props} />;
+            return <ChatInputBottomSheet />;
     }
 }

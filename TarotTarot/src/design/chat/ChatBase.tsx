@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { View } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
 import { useAppSelector } from "../../library/redux/ReduxStore";
+import { ChatInputTypes } from "./ChatInterface";
+import ChatInputProp from "./ChatInputProp";
 import Color from "../Color";
-import ChatInputProp, { ChatInputTypes } from "./ChatInputProp";
 
 /**
  * @description 채팅 화면을 렌더하는 Component입니다
@@ -13,7 +14,7 @@ import ChatInputProp, { ChatInputTypes } from "./ChatInputProp";
  * @param {function} onSend 메세지 전송 버튼을 눌렀을 때 수행할 함수를 전달합니다.
  */
 export default function ChatBase({ message, text, setText, onSend }) {
-    const [type, setType] = useState<ChatInputTypes>("Start");
+    const [type, setType] = useState<ChatInputTypes>("Draw");
 
     const { id, username, profilePic } = useAppSelector(
         (state) => state.userInfo,
@@ -39,19 +40,9 @@ export default function ChatBase({ message, text, setText, onSend }) {
                 onSend={onSend}
                 onInputTextChanged={setText}
                 // Add Custom Theme
-                renderInputToolbar={() => (
-                    <ChatInputProp
-                        type={type}
-                        onPressStartA={() => setType("Draw")}
-                        onPressStartB={() => setType("Draw")}
-                        onPressDraw={() => setType("End")}
-                        onPressEndA={() => setType("Input")}
-                        onPressEndB={() => setType("Hide")}
-                        multiline={true}
-                    />
-                )}
+                renderInputToolbar={() => null}
                 // renderBubble={CustomBubble}
-                // renderComposer={CustomComposer}
+                // renderComposer={ChatComposer}
                 // renderTime={CustomTime}
                 // renderSend={CustomSend}
                 // renderAvatar={CustomAvatar}
@@ -59,12 +50,15 @@ export default function ChatBase({ message, text, setText, onSend }) {
                 alwaysShowSend={true}
                 alignTop={true}
             />
-            {/* {Platform.OS === "android" && (
-                <KeyboardAvoidingView
-                    behavior={"padding"}
-                    keyboardVerticalOffset={80}
-                />
-            )} */}
+            <ChatInputProp
+                type={type}
+                onPressStartA={() => setType("Draw")}
+                onPressStartB={() => setType("Draw")}
+                onPressDraw={() => setType("End")}
+                onPressEndA={() => setType("Input")}
+                onPressEndB={() => setType("Hide")}
+                multiline={true}
+            />
         </View>
     );
 }

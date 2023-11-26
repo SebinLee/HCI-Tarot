@@ -524,12 +524,41 @@ PODS:
     - Firebase/Auth (= 10.17.0)
     - React-Core
     - RNFBApp
-  - RNGestureHandler (2.13.4):
+  - RNGestureHandler (2.14.0):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
   - RNGoogleSignin (10.1.1):
     - GoogleSignIn (~> 7.0)
     - React-Core
+  - RNReanimated (3.5.4):
+    - DoubleConversion
+    - FBLazyVector
+    - glog
+    - hermes-engine
+    - RCT-Folly
+    - RCTRequired
+    - RCTTypeSafety
+    - React-callinvoker
+    - React-Core
+    - React-Core/DevSupport
+    - React-Core/RCTWebSocket
+    - React-CoreModules
+    - React-cxxreact
+    - React-hermes
+    - React-jsi
+    - React-jsiexecutor
+    - React-jsinspector
+    - React-RCTActionSheet
+    - React-RCTAnimation
+    - React-RCTAppDelegate
+    - React-RCTBlob
+    - React-RCTImage
+    - React-RCTLinking
+    - React-RCTNetwork
+    - React-RCTSettings
+    - React-RCTText
+    - ReactCommon/turbomodule/core
+    - Yoga
   - RNScreens (3.27.0):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
@@ -598,6 +627,7 @@ DEPENDENCIES:
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - "RNGoogleSignin (from `../node_modules/@react-native-google-signin/google-signin`)"
+  - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
@@ -720,6 +750,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNGoogleSignin:
     :path: "../node_modules/@react-native-google-signin/google-signin"
+  RNReanimated:
+    :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNSVG:
@@ -790,8 +822,9 @@ SPEC CHECKSUMS:
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
   RNFBApp: b43d4829366a5065e17f9af3b03a0c4890eaeb85
   RNFBAuth: 944424c5ba04e250d35eccd3ee2033d6fd7150d7
-  RNGestureHandler: 6594263b1a123e43c23ff72c8d99080187e74bf9
+  RNGestureHandler: a5039da2ac028b073ae801289476060b34d559b1
   RNGoogleSignin: aac5c1ec73422109dec1da770247a1e410dcc620
+  RNReanimated: ab2e96c6d5591c3dfbb38a464f54c8d17fb34a87
   RNScreens: 3e56c56bd35436215a56f48a753e30e8ce018a09
   RNSVG: 255767813dac22db1ec2062c8b7e7b856d4e5ae6
   RNVectorIcons: 72a70504e1b0aebcc2d3bbcdf65a75f5f77175f3
