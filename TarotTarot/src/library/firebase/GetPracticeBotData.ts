@@ -2,15 +2,12 @@ import firestore from "@react-native-firebase/firestore";
 import { Alert } from "react-native";
 import { IMessage } from "react-native-gifted-chat";
 
-export default async function GetPracticeBotData() {
+export default async function GetPracticeBotData(docID = "") {
     return await firestore()
         .collection("practiceBot")
-        .where("kind", "==", "love")
+        .doc(docID)
         .get()
-        .then((querySnapshot) => {
-            const docs = querySnapshot.docs[0];
-            return docs.data();
-        })
+        .then((querySnapshot) => querySnapshot.data())
         .catch(() => {
             Alert.alert(
                 "Error",

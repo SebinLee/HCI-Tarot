@@ -12,7 +12,7 @@ import auth from "@react-native-firebase/auth";
 import MainContent from "./src/screen/MainContent";
 import Start from "./src/screen/Start";
 import Home from "./src/screen/Home";
-import Chat from "./src/screen/Chat/Chat";
+import PracticeBotChat from "./src/screen/PracticeBot/PracticeBotChat";
 
 export default function Routes() {
     // Create StackNavigator
@@ -31,12 +31,17 @@ export default function Routes() {
     // Handle firebase Auth
     const onAuthStateChanged = (user: any) => {
         if (user) {
-            // navigation.dispatch(
-            //     CommonActions.reset({
-            //         index: 1,
-            //         routes: [{ name: "Home", params: { routeParam: "front" } }],
-            //     }),
-            // );
+            navigation.dispatch(
+                CommonActions.reset({
+                    index: 1,
+                    routes: [
+                        {
+                            name: "MainContent",
+                            params: { routeParam: "front" },
+                        },
+                    ],
+                }),
+            );
 
             dispatch(
                 storeUserInfo({
@@ -53,9 +58,10 @@ export default function Routes() {
         return subscriber;
     });
 
+    // const routeParam = route?.params.routeParam;
+
     return (
         <Stack.Navigator screenOptions={TransitionScreenOptions}>
-            <Stack.Screen name="Chat" component={Chat} options={screenOption} />
             <Stack.Screen name="Home" component={Home} options={screenOption} />
             <Stack.Screen
                 name="Start"
@@ -65,6 +71,11 @@ export default function Routes() {
             <Stack.Screen
                 name="MainContent"
                 component={MainContent}
+                options={screenOption}
+            />
+            <Stack.Screen
+                name="PracticeBotChat"
+                component={PracticeBotChat}
                 options={screenOption}
             />
         </Stack.Navigator>

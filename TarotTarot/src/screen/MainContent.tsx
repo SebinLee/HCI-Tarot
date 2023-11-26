@@ -5,6 +5,7 @@ import {
 } from "@react-navigation/bottom-tabs";
 import TarotForest from "./TarotForest/TarotForest";
 import MyTarot from "./MyTarot/MyTarot";
+import PracticeBot from "./PracticeBot/PracticeBotMain";
 
 const Tab = createBottomTabNavigator();
 
@@ -23,6 +24,11 @@ export default function MainContent() {
             <Tab.Screen
                 name="MyTarot"
                 component={MyTarot}
+                options={screenOption}
+            />
+            <Tab.Screen
+                name="연습봇"
+                component={PracticeBot}
                 options={screenOption}
             />
         </Tab.Navigator>
