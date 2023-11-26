@@ -5,6 +5,7 @@ import { useAppSelector } from "../../library/redux/ReduxStore";
 import { ChatInputTypes } from "./ChatInterface";
 import ChatInputProp from "./ChatInputProp";
 import { TarotKeyword } from "../Tarot/TarotInterface";
+import ChatBubble from "./ChatBubble";
 
 /**
  * @description 채팅 화면을 렌더하는 Component입니다
@@ -20,11 +21,19 @@ export default function ChatBase({ message, text, setText, onSend }) {
         (state) => state.userInfo,
     );
 
-    // const { id, username, profilePic } = {
-    //     id: "",
-    //     username: "test",
-    //     profilePic: "",
-    // };
+    const customMessage = [
+        ...message,
+        {
+            _id: 13,
+            text: "My Text Test",
+            createdAt: Date.now(),
+            user: {
+                _id: id,
+                name: username,
+                avatar: profilePic,
+            },
+        },
+    ];
 
     return (
         <View style={{ flex: 1 }}>
@@ -35,7 +44,7 @@ export default function ChatBase({ message, text, setText, onSend }) {
                     avatar: profilePic,
                 }}
                 text={text}
-                messages={message}
+                messages={customMessage}
                 // Add Custom Theme
                 // Did not render default time and day
                 renderInputToolbar={() => (
@@ -53,7 +62,7 @@ export default function ChatBase({ message, text, setText, onSend }) {
                 )}
                 renderTime={() => null}
                 renderDay={() => null}
-                // renderBubble={CustomBubble}
+                renderBubble={ChatBubble}
                 // renderAvatar={CustomAvatar}
                 renderAvatarOnTop={true}
                 alwaysShowSend={true}
