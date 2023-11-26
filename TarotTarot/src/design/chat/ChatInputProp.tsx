@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import { Dimensions, ScrollView, View } from "react-native";
 import Chip, { ChipContainer } from "../Chip";
 import ChatInputBottomSheet from "./ChatInputBottomSheet";
 import { ChatInputProps } from "./ChatInterface";
@@ -42,25 +42,28 @@ export default function ChatInputProp({
 
         case "End":
             return (
-                <View
-                    style={{
-                        height: 60,
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                    }}
-                >
-                    <ChatChip
-                        text="새로운 상담 시작하기"
-                        onPress={onPressEndA}
-                    />
-                    <ChatChip
-                        text="다른 리더의 해석 보러가기"
-                        onPress={onPressEndB}
-                    />
-                </View>
+                <ChipContainer>
+                    <ScrollView
+                        style={{
+                            paddingHorizontal:
+                                Dimensions.get("screen").width * 0.05,
+                        }}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                    >
+                        <ChatChip
+                            text="새로운 상담 시작하기"
+                            onPress={onPressEndA}
+                        />
+                        <ChatChip
+                            text="다른 리더의 해석 보러가기"
+                            onPress={onPressEndB}
+                        />
+                    </ScrollView>
+                </ChipContainer>
             );
 
         case "Input":
-            return <ChatInputBottomSheet />;
+            return <ChatInputBottomSheet {...props} />;
     }
 }

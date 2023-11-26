@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ChatBase from "../../design/chat/ChatBase";
 import Screen from "../../design/Screen";
 import { IMessage } from "react-native-gifted-chat";
+import { View } from "react-native";
 
 export default function Chat() {
     const [text, setText] = useState("");

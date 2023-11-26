@@ -4,7 +4,7 @@ import { GiftedChat } from "react-native-gifted-chat";
 import { useAppSelector } from "../../library/redux/ReduxStore";
 import { ChatInputTypes } from "./ChatInterface";
 import ChatInputProp from "./ChatInputProp";
-import Color from "../Color";
+import { TarotKeyword } from "../Tarot/TarotInterface";
 
 /**
  * @description 채팅 화면을 렌더하는 Component입니다
@@ -27,7 +27,7 @@ export default function ChatBase({ message, text, setText, onSend }) {
     // };
 
     return (
-        <View style={{ flex: 1, backgroundColor: Color.Primary_light }}>
+        <View style={{ flex: 1 }}>
             <GiftedChat
                 user={{
                     _id: id,
@@ -36,15 +36,12 @@ export default function ChatBase({ message, text, setText, onSend }) {
                 }}
                 text={text}
                 messages={message}
-                // Indicate Functions
-                onSend={onSend}
-                onInputTextChanged={setText}
                 // Add Custom Theme
+                // Did not render default input toolbar, time and day
                 renderInputToolbar={() => null}
+                renderTime={() => null}
+                renderDay={() => null}
                 // renderBubble={CustomBubble}
-                // renderComposer={ChatComposer}
-                // renderTime={CustomTime}
-                // renderSend={CustomSend}
                 // renderAvatar={CustomAvatar}
                 renderAvatarOnTop={true}
                 alwaysShowSend={true}
@@ -58,7 +55,33 @@ export default function ChatBase({ message, text, setText, onSend }) {
                 onPressEndA={() => setType("Input")}
                 onPressEndB={() => setType("Hide")}
                 multiline={true}
+                tarots={dummyTarots}
+                onPressSend={onPressSend}
             />
         </View>
     );
 }
+
+// Dummy data for tarot card display
+const dummyTarots: TarotKeyword[] = [
+    {
+        index: 56,
+        topic: "연애",
+        keywords:
+            "test1, test2, test3, test4, test5, test3, test4, test5, test3, test4, test5",
+    },
+    {
+        index: 59,
+        topic: "금전",
+        keywords: "test1, test2, test3, test4, test5",
+    },
+    {
+        index: 77,
+        topic: "학업",
+        keywords: "test1, test2, test3, test4, test5",
+    },
+];
+
+const onPressSend = () => {
+    console.log("Implement Submit Function Here");
+};
