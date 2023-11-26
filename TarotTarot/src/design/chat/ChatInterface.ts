@@ -1,4 +1,5 @@
 import { TextInputProps } from "react-native";
+import { TarotKeyword } from "../Tarot/TarotInterface";
 
 export type ChatInputTypes = "Start" | "Draw" | "Hide" | "Input" | "End";
 export interface ChatInputChipFunctions {
@@ -9,14 +10,8 @@ export interface ChatInputChipFunctions {
     onPressEndB: () => void;
 }
 
-export interface Tarot {
-    index: number;
-    topic: string;
-    keywords: string;
-}
-
 export interface ChatInputTarotProps extends TextInputProps {
-    tarots: Tarot[];
+    tarots: TarotKeyword[];
     onPressSend: () => void;
 }
 
