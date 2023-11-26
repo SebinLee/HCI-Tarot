@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ChatBase from "../../design/chat/ChatBase";
 import Screen from "../../design/Screen";
 import { IMessage } from "react-native-gifted-chat";
-import { View } from "react-native";
 
 export default function Chat() {
     const [text, setText] = useState("");
@@ -78,6 +77,27 @@ export default function Chat() {
                 _id: "test",
                 name: "DummyUser",
             },
+            image: "https://avatars.githubusercontent.com/u/44885477?v=4",
+        },
+        {
+            _id: 9,
+            text: "testtesttest",
+            createdAt: Date.now(),
+            user: {
+                _id: "test",
+                name: "DummyUser",
+            },
+            image: "https://avatars.githubusercontent.com/u/44885477?v=4",
+        },
+        {
+            _id: 10,
+            text: "testtesttest",
+            createdAt: Date.now(),
+            user: {
+                _id: "test",
+                name: "DummyUser",
+            },
+            image: "https://avatars.githubusercontent.com/u/44885477?v=4",
         },
     ]);
 

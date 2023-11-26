@@ -182,7 +182,7 @@ const style = StyleSheet.create({
     textInput: {
         flex: 1,
         height: 36,
-        marginTop: 5,
+        // marginTop: 5,
         marginRight: 10,
     },
     dummyFill: {

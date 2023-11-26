@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { Dimensions, View } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
 import { useAppSelector } from "../../library/redux/ReduxStore";
 import { ChatInputTypes } from "./ChatInterface";
@@ -37,8 +37,20 @@ export default function ChatBase({ message, text, setText, onSend }) {
                 text={text}
                 messages={message}
                 // Add Custom Theme
-                // Did not render default input toolbar, time and day
-                renderInputToolbar={() => null}
+                // Did not render default time and day
+                renderInputToolbar={() => (
+                    <ChatInputProp
+                        type={type}
+                        onPressStartA={() => setType("Draw")}
+                        onPressStartB={() => setType("Draw")}
+                        onPressDraw={() => setType("End")}
+                        onPressEndA={() => setType("Input")}
+                        onPressEndB={() => setType("Hide")}
+                        multiline={true}
+                        tarots={dummyTarots}
+                        onPressSend={onPressSend}
+                    />
+                )}
                 renderTime={() => null}
                 renderDay={() => null}
                 // renderBubble={CustomBubble}
@@ -46,17 +58,13 @@ export default function ChatBase({ message, text, setText, onSend }) {
                 renderAvatarOnTop={true}
                 alwaysShowSend={true}
                 alignTop={true}
-            />
-            <ChatInputProp
-                type={type}
-                onPressStartA={() => setType("Draw")}
-                onPressStartB={() => setType("Draw")}
-                onPressDraw={() => setType("End")}
-                onPressEndA={() => setType("Input")}
-                onPressEndB={() => setType("Hide")}
-                multiline={true}
-                tarots={dummyTarots}
-                onPressSend={onPressSend}
+                inverted={false}
+                messagesContainerStyle={{
+                    paddingBottom:
+                        type === "Input"
+                            ? Dimensions.get("window").height * 0.28
+                            : 10,
+                }}
             />
         </View>
     );
