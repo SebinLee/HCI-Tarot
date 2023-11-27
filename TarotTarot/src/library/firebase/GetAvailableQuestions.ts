@@ -4,11 +4,11 @@ import { Alert } from "react-native";
 
 export default async function GetAvailableQuestions(
     userID = "",
-    topic = "love",
+    topic = "연애운",
 ) {
     return await firestore()
         .collection("practiceBot")
-        .where("kind", "==", topic)
+        .where("topic", "==", topic)
         .get()
         .then((querySnapshot) => {
             const docs = querySnapshot.docs.filter(

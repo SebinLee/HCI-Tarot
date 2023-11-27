@@ -20,7 +20,7 @@ export default function PracticeBot({ navigation }) {
                         title={item.title}
                         description={item.description}
                         onPress={() => {
-                            GetAvailableQuestions(id, item.kind).then(
+                            GetAvailableQuestions(id, item.topic).then(
                                 (docId) => {
                                     if (docId) {
                                         navigation.push("PracticeBotChat", {
@@ -66,22 +66,22 @@ const Item = ({ title, description, onPress }) => (
 
 const data = [
     {
-        kind: "tutorial",
+        topic: "튜토리얼",
         title: "뉴비봇",
         description: "튜토리얼",
     },
     {
-        kind: "love",
+        topic: "연애운",
         title: "연애상담",
         description: "연애봇",
     },
     {
-        kind: "money",
+        topic: "금전운",
         title: "금전봇",
         description: "금전상담",
     },
     {
-        kind: "study",
+        topic: "학업운",
         title: "학업봇",
         description: "학업상담",
     },
