@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Dimensions, View } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
 import { useAppSelector } from "../../library/redux/ReduxStore";
-import { ChatInputTypes } from "./ChatInterface";
+import { ChatBaseProps, ChatInputProps, ChatInputTypes } from "./ChatInterface";
 import ChatInputProp from "./ChatInputProp";
 import { TarotKeyword } from "../Tarot/TarotInterface";
 import ChatBubble from "./ChatBubble";
@@ -14,9 +14,7 @@ import ChatBubble from "./ChatBubble";
  * @param {function} setText 현재 입력중인 텍스트를 변경할 수 있는 함수를 전달합니다.
  * @param {function} onSend 메세지 전송 버튼을 눌렀을 때 수행할 함수를 전달합니다.
  */
-export default function ChatBase({ message, text, setText, onSend, tarots }) {
-    const [type, setType] = useState<ChatInputTypes>("Draw");
-
+export default function ChatBase({ type, message, ...props }: ChatBaseProps) {
     const { id, username, profilePic } = useAppSelector(
         (state) => state.userInfo,
     );
@@ -29,22 +27,11 @@ export default function ChatBase({ message, text, setText, onSend, tarots }) {
                     name: username,
                     avatar: profilePic,
                 }}
-                text={text}
                 messages={message}
                 // Add Custom Theme
                 // Did not render default time and day
                 renderInputToolbar={() => (
-                    <ChatInputProp
-                        type={type}
-                        onPressStartA={() => setType("Draw")}
-                        onPressStartB={() => setType("Draw")}
-                        onPressDraw={() => setType("End")}
-                        onPressEndA={() => setType("Input")}
-                        onPressEndB={() => setType("Hide")}
-                        multiline={true}
-                        tarots={tarots}
-                        onPressSend={onPressSend}
-                    />
+                    <ChatInputProp {...props} type={type} multiline={true} />
                 )}
                 renderTime={() => null}
                 renderDay={() => null}

@@ -1,22 +1,17 @@
 import { TextInputProps } from "react-native";
 import { TarotKeyword } from "../Tarot/TarotInterface";
+import { IMessage } from "react-native-gifted-chat";
 
 export type ChatInputTypes = "Start" | "Draw" | "Hide" | "Input" | "End";
-export interface ChatInputChipFunctions {
-    onPressStartA: () => void;
-    onPressStartB: () => void;
-    onPressDraw: () => void;
-    onPressEndA: () => void;
-    onPressEndB: () => void;
-}
-
 export interface ChatInputTarotProps extends TextInputProps {
     tarots: TarotKeyword[];
     onPressSend: () => void;
 }
 
-export interface ChatInputProps
-    extends ChatInputChipFunctions,
-        ChatInputTarotProps {
+export interface ChatInputProps extends ChatInputTarotProps {
     type: ChatInputTypes;
+}
+
+export interface ChatBaseProps extends ChatInputProps {
+    message: IMessage[];
 }

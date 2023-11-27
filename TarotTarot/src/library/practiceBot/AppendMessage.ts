@@ -1,6 +1,6 @@
-export default function AppendMessage(setMessageData, setMessage) {
+export default function AppendMessage(setserverData, setMessage) {
     const interval = setInterval(() => {
-        setMessageData((prevData) => {
+        setserverData((prevData) => {
             setMessage((prevMessage) => {
                 // Append Data
                 if (prevMessage.length < prevData.chats.length) {
@@ -19,10 +19,9 @@ export default function AppendMessage(setMessageData, setMessage) {
 
                 return [...prevMessage];
             });
-
             return { ...prevData };
         });
-    }, 2000);
+    }, 500);
 
     return interval;
 }

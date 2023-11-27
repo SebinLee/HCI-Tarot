@@ -5,12 +5,8 @@ import ChatInputBottomSheet from "./ChatInputBottomSheet";
 import { ChatInputProps } from "./ChatInterface";
 
 export default function ChatInputProp({
-    type = "End",
-    onPressStartA,
-    onPressStartB,
-    onPressDraw,
-    onPressEndA,
-    onPressEndB,
+    type,
+    onPressSend,
     ...props
 }: ChatInputProps) {
     //@ts-ignore
@@ -28,15 +24,15 @@ export default function ChatInputProp({
         case "Start":
             return (
                 <ChipContainer style={{ justifyContent: "space-around" }}>
-                    <ChatChip text="선택지 A" onPress={onPressStartA} />
-                    <ChatChip text="선택지 B" onPress={onPressStartB} />
+                    <ChatChip text="선택지 A" onPress={onPressSend} />
+                    <ChatChip text="선택지 B" onPress={onPressSend} />
                 </ChipContainer>
             );
 
         case "Draw":
             return (
                 <ChipContainer style={{ justifyContent: "space-around" }}>
-                    <ChatChip text="카드를 뽑아주세요" onPress={onPressDraw} />
+                    <ChatChip text="카드를 뽑아주세요" onPress={onPressSend} />
                 </ChipContainer>
             );
 
@@ -53,17 +49,19 @@ export default function ChatInputProp({
                     >
                         <ChatChip
                             text="새로운 상담 시작하기"
-                            onPress={onPressEndA}
+                            onPress={onPressSend}
                         />
                         <ChatChip
                             text="다른 리더의 해석 보러가기"
-                            onPress={onPressEndB}
+                            onPress={onPressSend}
                         />
                     </ScrollView>
                 </ChipContainer>
             );
 
         case "Input":
-            return <ChatInputBottomSheet {...props} />;
+            return (
+                <ChatInputBottomSheet {...props} onPressSend={onPressSend} />
+            );
     }
 }
