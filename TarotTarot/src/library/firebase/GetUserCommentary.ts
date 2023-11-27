@@ -7,7 +7,12 @@ export default async function GetUserCommentary(docID) {
         .doc(docID)
         .collection("userAnswer")
         .get()
-        .then((querySnapshot) => querySnapshot.docs.map((doc) => doc.data()))
+        .then((querySnapshot) =>
+            querySnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            })),
+        )
         .catch(() => {
             Alert.alert(
                 "Error",
