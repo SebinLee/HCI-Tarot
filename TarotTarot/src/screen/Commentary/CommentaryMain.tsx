@@ -1,43 +1,56 @@
 import React, { useEffect, useState } from "react";
 import Screen from "../../design/Screen";
-import { FlatList, TouchableOpacity, View } from "react-native";
-import { Text, TextType } from "../../design/Text";
+import { FlatList } from "react-native";
 import GetPracticeQuestions from "../../library/firebase/GetPracticeQuestions";
+import CommentaryQuestionList from "../../design/commentary/CommentaryQuestionList";
+import CommentaryFilter from "../../design/commentary/CommentaryFilter";
 
 export default function CommentaryMain({ navigation }) {
     const [questions, setQuestions] = useState([]);
+    const [displayData, setDisplayData] = useState([]);
+    const [selectedChips, setSelectedChips] = useState([]);
 
     useEffect(() => {
-        GetPracticeQuestions().then((data) => setQuestions(data));
+        GetPracticeQuestions().then((data) => {
+            setQuestions(data);
+            setDisplayData(data?.filter((item) => item.topic != "튜토리얼"));
+        });
     }, []);
 
-    // useEffect(() => {
-    //     console.log(questions);
-    // }, [questions]);
+    useEffect(() => {
+        if (selectedChips.length < 1) {
+            setDisplayData(
+                questions.filter((item) => item.topic != "튜토리얼"),
+            );
+        } else {
+            setDisplayData(
+                questions.filter((data) => selectedChips.includes(data.topic)),
+            );
+        }
+    }, [selectedChips]);
 
     return (
         <Screen title="해석 리스트">
             <FlatList
-                data={questions}
-                renderItem={(data) => {
-                    console.log(data);
-
-                    return (
-                        <TouchableOpacity
-                            onPress={() =>
-                                navigation.push("CommentaryPost", {
-                                    data: data.item,
-                                })
-                            }
-                        >
-                            <View>
-                                <Text type={TextType.H2}>
-                                    Q. {data?.item.question}
-                                </Text>
-                            </View>
-                        </TouchableOpacity>
-                    );
-                }}
+                data={displayData}
+                ListHeaderComponent={() => (
+                    <CommentaryFilter
+                        selectedChips={selectedChips}
+                        setSelectedChips={setSelectedChips}
+                    />
+                )}
+                renderItem={(data) => (
+                    <CommentaryQuestionList
+                        key={data.item.id}
+                        question={data.item.question}
+                        topic={data.item.topic}
+                        onPress={() => {
+                            navigation.push("CommentaryPost", {
+                                data: data.item,
+                            });
+                        }}
+                    />
+                )}
             />
         </Screen>
     );

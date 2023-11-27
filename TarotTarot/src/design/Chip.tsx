@@ -121,8 +121,8 @@ const styles = StyleSheet.create({
 
 const ChipColor = {
     SolidDisabled: {
-        Button: Color.Gray,
-        Text: Color.White,
+        Button: "#EBEBF0",
+        Text: Color.Black,
     },
 
     SolidEnabled: {
