@@ -30,7 +30,7 @@ export const TarotCardType = [
     { card: "Strength", source: require("./assets/tarotCard/8.jpg") },
     { card: "The Hermit", source: require("./assets/tarotCard/9.jpg") },
     {
-        card: "The Wheel  of  Fortune",
+        card: "The Wheel of Fortune",
         source: require("./assets/tarotCard/10.jpg"),
     },
     { card: "Justice", source: require("./assets/tarotCard/11.jpg") },
