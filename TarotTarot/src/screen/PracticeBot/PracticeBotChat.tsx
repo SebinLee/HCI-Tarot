@@ -9,7 +9,7 @@ import { ChatInputTypes } from "../../design/chat/ChatInterface";
 export default function PracticeBotChat({ navigation, route }) {
     const [type, setType] = useState<ChatInputTypes>("Hide");
     const [message, setMessage] = useState<IMessage[]>([]);
-    const [serverData, setserverData] = useState({
+    const [serverData, setServerData] = useState({
         chats: [],
         routeIndex: [],
         routeTo: [],
@@ -25,7 +25,7 @@ export default function PracticeBotChat({ navigation, route }) {
             GetPracticeBotData(route.params.id).then((data) => {
                 console.log(data);
                 const { chats, routeIndex, routeTo, tarotCards } = data;
-                setserverData({ chats, routeIndex, routeTo, tarotCards });
+                setServerData({ chats, routeIndex, routeTo, tarotCards });
             });
         }
     }, []);
@@ -33,7 +33,7 @@ export default function PracticeBotChat({ navigation, route }) {
     // Start appending chats after serverData state has initialized
     useEffect(() => {
         if (serverData.chats.length > 0 && appendMessage.current === null) {
-            appendMessage.current = AppendMessage(setserverData, setMessage);
+            appendMessage.current = AppendMessage(setServerData, setMessage);
         }
     }, [serverData.chats]);
 
@@ -52,9 +52,67 @@ export default function PracticeBotChat({ navigation, route }) {
         console.log("Pressed");
     };
 
+    const removeRouting = () => {
+        setServerData((prev) => ({
+            ...prev,
+            routeIndex: prev.routeIndex.filter((v, index) => index != 0),
+            routeTo: prev.routeTo.filter((v, index) => index != 0),
+        }));
+    };
+
+    const chips = {
+        start: [
+            {
+                text: "선택지 A",
+                onPress: () => {
+                    removeRouting();
+                    appendMessage.current = AppendMessage(
+                        setServerData,
+                        setMessage,
+                    );
+                    setType("Hide");
+                },
+            },
+            {
+                text: "선택지 B",
+                onPress: () => {
+                    removeRouting();
+                    appendMessage.current = AppendMessage(
+                        setServerData,
+                        setMessage,
+                    );
+                    setType("Hide");
+                },
+            },
+        ],
+        draw: [
+            {
+                text: "선택지 A",
+                onPress: () => {
+                    setType("Input");
+                },
+            },
+        ],
+        end: [
+            {
+                text: "새로운 상담 시작하기",
+                onPress: () => {
+                    console.log("Exit");
+                },
+            },
+            {
+                text: "다른 리더의 해석 보러가기",
+                onPress: () => {
+                    console.log("Exit");
+                },
+            },
+        ],
+    };
+
     return (
         <Screen title="Chats" horizontalPadding={false}>
             <ChatBase
+                chips={chips}
                 type={type}
                 onPressSend={onPressSend}
                 message={message}

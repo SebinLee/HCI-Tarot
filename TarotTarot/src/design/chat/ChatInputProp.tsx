@@ -7,6 +7,7 @@ import { ChatInputProps } from "./ChatInterface";
 export default function ChatInputProp({
     type,
     onPressSend,
+    chips,
     ...props
 }: ChatInputProps) {
     //@ts-ignore
@@ -24,15 +25,26 @@ export default function ChatInputProp({
         case "Start":
             return (
                 <ChipContainer style={{ justifyContent: "space-around" }}>
-                    <ChatChip text="선택지 A" onPress={onPressSend} />
-                    <ChatChip text="선택지 B" onPress={onPressSend} />
+                    {chips.start.map((item, index) => (
+                        <ChatChip
+                            text={item.text}
+                            onPress={item.onPress}
+                            key={`start_${index}`}
+                        />
+                    ))}
                 </ChipContainer>
             );
 
         case "Draw":
             return (
                 <ChipContainer style={{ justifyContent: "space-around" }}>
-                    <ChatChip text="카드를 뽑아주세요" onPress={onPressSend} />
+                    {chips.draw.map((item, index) => (
+                        <ChatChip
+                            text={item.text}
+                            onPress={item.onPress}
+                            key={`draw${index}`}
+                        />
+                    ))}
                 </ChipContainer>
             );
 
@@ -47,14 +59,13 @@ export default function ChatInputProp({
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                     >
-                        <ChatChip
-                            text="새로운 상담 시작하기"
-                            onPress={onPressSend}
-                        />
-                        <ChatChip
-                            text="다른 리더의 해석 보러가기"
-                            onPress={onPressSend}
-                        />
+                        {chips.end.map((item, index) => (
+                            <ChatChip
+                                text={item.text}
+                                onPress={item.onPress}
+                                key={`end_${index}`}
+                            />
+                        ))}
                     </ScrollView>
                 </ChipContainer>
             );
