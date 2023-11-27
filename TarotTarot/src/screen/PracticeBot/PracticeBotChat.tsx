@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IMessage } from "react-native-gifted-chat";
 import { TarotKeyword } from "../../design/Tarot/TarotInterface";
 import GetPracticeBotData from "../../library/firebase/GetPracticeBotData";
 import ChatBase from "../../design/chat/ChatBase";
 import Screen from "../../design/Screen";
+import AppendMessage from "../../library/practiceBot/AppendMessage";
 
 export default function PracticeBotChat({ navigation, route }) {
     const [text, setText] = useState("");
@@ -14,22 +15,16 @@ export default function PracticeBotChat({ navigation, route }) {
         routeTo: [],
     });
     const [tarots, setTarots] = useState<TarotKeyword[]>([]);
-    let appendMessage = null;
+    let appendMessage = useRef<Number>(null);
 
     useEffect(() => {
         console.log(route.params);
         if (route?.params?.id) {
             GetPracticeBotData(route.params.id).then((data) => {
-                setMessageData({
-                    chats: data?.chats,
-                    routeIndex: Object.keys(data?.routeIndex).map((value) =>
-                        parseInt(value),
-                    ),
-                    routeTo: Object.values(data?.routeIndex),
-                });
-
+                const { chats, routeIndex, routeTo, tarotCards } = data;
+                setMessageData({ chats, routeIndex, routeTo });
                 setTarots(
-                    data?.tarotCards.map((data) => ({
+                    tarotCards.map((data) => ({
                         index: data.index,
                         topic: data.topic,
                         keywords: data.keywords,
@@ -40,32 +35,14 @@ export default function PracticeBotChat({ navigation, route }) {
     }, []);
 
     useEffect(() => {
-        if (messageData.chats.length > 0 && !appendMessage)
-            appendMessage = setInterval(() => {
-                setMessageData((prevData) => {
-                    setMessage((prevMessage) => {
-                        // Append Data
-                        if (prevMessage.length < prevData.chats.length) {
-                            const dataToAppend = {
-                                _id: Date.now(),
-                                text: prevData.chats[prevMessage.length],
-                                createdAt: Date.now(),
-                                user: {
-                                    _id: "system",
-                                    name: "연애봇",
-                                },
-                            };
-
-                            return [...prevMessage, dataToAppend];
-                        }
-
-                        return [...prevMessage];
-                    });
-
-                    return { ...prevData };
-                });
-            }, 2000);
+        if (messageData.chats.length > 0 && appendMessage.current === null)
+            appendMessage.current = AppendMessage(setMessageData, setMessage);
     }, [messageData.chats]);
+
+    useEffect(() => {
+        if (message.length > messageData.routeIndex[0])
+            clearInterval(appendMessage.current);
+    }, [message]);
 
     const onSend = () => {
         console.log("Pressed");
