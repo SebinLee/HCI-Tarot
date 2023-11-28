@@ -23,6 +23,7 @@ import Wand from "../../design/assets/tarotStory/I_Wand.svg";
 //@ts-ignore
 import WandDisabled from "../../design/assets/tarotStory/I_Wand_Disabled.svg";
 import { Icon } from "@ui-kitten/components";
+import { NavigationPropEnum } from "../../design/layout/LayoutInterface";
 
 const contents = [
     "산책로 입구",
@@ -30,13 +31,189 @@ const contents = [
     "마이너카드 완드 산책로",
 ];
 
-export default function TarotStory() {
-    const [index, setIndex] = useState(2);
+export default function TarotStory({ navigation }) {
+    const [index, setIndex] = useState(0);
     const [modalVisible, setModalVisible] = useState(false);
-    const data = useRef([Story, Major, MinorWand]);
+
+    const Story = useRef<StoryRoadItemProp[]>([
+        {
+            text: "Tarot Deck",
+            onPress: () => {
+                navigation.push("TarotStoryDetail");
+            },
+            disabled: false,
+            Decoration: Flag,
+            DisabledDecoration: Flag,
+        },
+        {
+            text: "Major & Minor",
+            onPress: () => {
+                navigation.push("TarotStoryDetail");
+            },
+            disabled: false,
+            Decoration: Flag,
+            DisabledDecoration: FlagDisabled,
+        },
+        {
+            text: "Suit",
+            onPress: () => {
+                navigation.push("TarotStoryDetail");
+            },
+            disabled: true,
+            Decoration: Flag,
+            DisabledDecoration: FlagDisabled,
+        },
+        {
+            text: "Pip & Court Card",
+            onPress: () => {
+                navigation.push("TarotStoryDetail");
+            },
+            disabled: true,
+            Decoration: Flag,
+            DisabledDecoration: FlagDisabled,
+        },
+        {
+            text: "Spread",
+            onPress: () => {
+                navigation.push("TarotStoryDetail");
+            },
+            disabled: true,
+            Decoration: Flag,
+            DisabledDecoration: FlagDisabled,
+        },
+        {
+            text: "Finish",
+            onPress: () => {
+                navigation.push("TarotStoryDetail");
+            },
+            disabled: true,
+            Decoration: Flag,
+            DisabledDecoration: FlagDisabled,
+        },
+    ]);
+
+    const Major = useRef<StoryRoadItemProp[]>([
+        {
+            text: "The Fool",
+            onPress: () => {
+                navigation.push("TarotStoryDetail");
+            },
+            disabled: false,
+            Decoration: Tree,
+            DisabledDecoration: TreeDisabled,
+        },
+        {
+            text: "The Magician",
+            onPress: () => {
+                navigation.push("TarotStoryDetail");
+            },
+            disabled: false,
+            Decoration: Tree,
+            DisabledDecoration: TreeDisabled,
+        },
+        {
+            text: "The High Priestess",
+            onPress: () => {
+                navigation.push("TarotStoryDetail");
+            },
+            disabled: false,
+            Decoration: Tree,
+            DisabledDecoration: TreeDisabled,
+        },
+        {
+            text: "The Empress",
+            onPress: () => {
+                navigation.push("TarotStoryDetail");
+            },
+            disabled: true,
+            Decoration: Tree,
+            DisabledDecoration: TreeDisabled,
+        },
+        {
+            text: "The Emperor",
+            onPress: () => {
+                navigation.push("TarotStoryDetail");
+            },
+            disabled: true,
+            Decoration: Tree,
+            DisabledDecoration: TreeDisabled,
+        },
+        {
+            text: "The Hierophant",
+            onPress: () => {
+                navigation.push("TarotStoryDetail");
+            },
+            disabled: true,
+            Decoration: Tree,
+            DisabledDecoration: TreeDisabled,
+        },
+    ]);
+
+    const MinorWand = useRef<StoryRoadItemProp[]>([
+        {
+            text: "King of Wands",
+            onPress: () => {
+                navigation.push("TarotStoryDetail");
+            },
+            disabled: false,
+            Decoration: Wand,
+            DisabledDecoration: WandDisabled,
+        },
+        {
+            text: "Ace of Wands",
+            onPress: () => {
+                navigation.push("TarotStoryDetail");
+            },
+            disabled: false,
+            Decoration: Wand,
+            DisabledDecoration: WandDisabled,
+        },
+        {
+            text: "II of Wands",
+            onPress: () => {
+                navigation.push("TarotStoryDetail");
+            },
+            disabled: false,
+            Decoration: Wand,
+            DisabledDecoration: WandDisabled,
+        },
+        {
+            text: "III of Wands",
+            onPress: () => {
+                navigation.push("TarotStoryDetail");
+            },
+            disabled: true,
+            Decoration: Wand,
+            DisabledDecoration: WandDisabled,
+        },
+        {
+            text: "IV of Wands",
+            onPress: () => {
+                navigation.push("TarotStoryDetail");
+            },
+            disabled: true,
+            Decoration: Flag,
+            DisabledDecoration: FlagDisabled,
+        },
+        {
+            text: "V of Wands",
+            onPress: () => {
+                navigation.push("TarotStoryDetail");
+            },
+            disabled: true,
+            Decoration: Wand,
+            DisabledDecoration: WandDisabled,
+        },
+    ]);
+
+    const data = useRef([Story.current, Major.current, MinorWand.current]);
 
     return (
-        <Screen title="타로스토리" horizontalPadding={false}>
+        <Screen
+            title="타로스토리"
+            horizontalPadding={false}
+            navigationLeftProp={NavigationPropEnum.hide}
+        >
             <View style={style.background} />
             <View style={style.buttonContainer}>
                 <TouchableOpacity
@@ -110,138 +287,3 @@ const style = StyleSheet.create({
         backgroundColor: Color.White,
     },
 });
-
-const Story: StoryRoadItemProp[] = [
-    {
-        text: "Tarot Deck",
-        onPress: () => {},
-        disabled: false,
-        Decoration: Flag,
-        DisabledDecoration: Flag,
-    },
-    {
-        text: "Major & Minor",
-        onPress: () => {},
-        disabled: false,
-        Decoration: Flag,
-        DisabledDecoration: FlagDisabled,
-    },
-    {
-        text: "Suit",
-        onPress: () => {},
-        disabled: true,
-        Decoration: Flag,
-        DisabledDecoration: FlagDisabled,
-    },
-    {
-        text: "Pip & Court Card",
-        onPress: () => {},
-        disabled: true,
-        Decoration: Flag,
-        DisabledDecoration: FlagDisabled,
-    },
-    {
-        text: "Spread",
-        onPress: () => {},
-        disabled: true,
-        Decoration: Flag,
-        DisabledDecoration: FlagDisabled,
-    },
-    {
-        text: "Finish",
-        onPress: () => {},
-        disabled: true,
-        Decoration: Flag,
-        DisabledDecoration: FlagDisabled,
-    },
-];
-
-const Major: StoryRoadItemProp[] = [
-    {
-        text: "The Fool",
-        onPress: () => {},
-        disabled: false,
-        Decoration: Tree,
-        DisabledDecoration: TreeDisabled,
-    },
-    {
-        text: "The Magician",
-        onPress: () => {},
-        disabled: false,
-        Decoration: Tree,
-        DisabledDecoration: TreeDisabled,
-    },
-    {
-        text: "The High Priestess",
-        onPress: () => {},
-        disabled: false,
-        Decoration: Tree,
-        DisabledDecoration: TreeDisabled,
-    },
-    {
-        text: "The Empress",
-        onPress: () => {},
-        disabled: true,
-        Decoration: Tree,
-        DisabledDecoration: TreeDisabled,
-    },
-    {
-        text: "The Emperor",
-        onPress: () => {},
-        disabled: true,
-        Decoration: Tree,
-        DisabledDecoration: TreeDisabled,
-    },
-    {
-        text: "The Hierophant",
-        onPress: () => {},
-        disabled: true,
-        Decoration: Tree,
-        DisabledDecoration: TreeDisabled,
-    },
-];
-
-const MinorWand: StoryRoadItemProp[] = [
-    {
-        text: "King of Wands",
-        onPress: () => {},
-        disabled: false,
-        Decoration: Wand,
-        DisabledDecoration: WandDisabled,
-    },
-    {
-        text: "Ace of Wands",
-        onPress: () => {},
-        disabled: false,
-        Decoration: Wand,
-        DisabledDecoration: WandDisabled,
-    },
-    {
-        text: "II of Wands",
-        onPress: () => {},
-        disabled: false,
-        Decoration: Wand,
-        DisabledDecoration: WandDisabled,
-    },
-    {
-        text: "III of Wands",
-        onPress: () => {},
-        disabled: true,
-        Decoration: Wand,
-        DisabledDecoration: WandDisabled,
-    },
-    {
-        text: "IV of Wands",
-        onPress: () => {},
-        disabled: true,
-        Decoration: Flag,
-        DisabledDecoration: FlagDisabled,
-    },
-    {
-        text: "V of Wands",
-        onPress: () => {},
-        disabled: true,
-        Decoration: Wand,
-        DisabledDecoration: WandDisabled,
-    },
-];
