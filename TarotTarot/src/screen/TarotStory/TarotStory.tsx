@@ -2,7 +2,10 @@ import React, { useRef, useState } from "react";
 import { Dimensions, StyleSheet, TouchableOpacity, View } from "react-native";
 import Color from "../../design/Color";
 import Screen from "../../design/Screen";
+import Modal from "../../design/Modal";
+import Button from "../../design/Button";
 import { Text } from "../../design/Text";
+import { ButtonSize } from "../../design/button/ButtonInterface";
 import TarotStoryDecorations, {
     StoryRoadItemProp,
 } from "../../design/tarotStory/TarotStoryDecorations";
@@ -19,20 +22,74 @@ import TreeDisabled from "../../design/assets/tarotStory/I_Tree_Disabled.svg";
 import Wand from "../../design/assets/tarotStory/I_Wand.svg";
 //@ts-ignore
 import WandDisabled from "../../design/assets/tarotStory/I_Wand_Disabled.svg";
+import { Icon } from "@ui-kitten/components";
+
+const contents = [
+    "산책로 입구",
+    "메이저 카드 산책로",
+    "마이너카드 완드 산책로",
+];
 
 export default function TarotStory() {
     const [index, setIndex] = useState(2);
+    const [modalVisible, setModalVisible] = useState(false);
     const data = useRef([Story, Major, MinorWand]);
 
     return (
         <Screen title="타로스토리" horizontalPadding={false}>
             <View style={style.background} />
             <View style={style.buttonContainer}>
-                <TouchableOpacity>
-                    <Text color={Color.Primary}>산책로 입구</Text>
+                <TouchableOpacity
+                    onPress={() => setModalVisible(true)}
+                    style={{ flexDirection: "row", alignItems: "center" }}
+                >
+                    <Text color={Color.Primary}>{contents[index]}</Text>
+                    <View
+                        style={{
+                            width: 15,
+                            height: 15,
+                            borderRadius: 20,
+                            marginLeft: 5,
+                            borderWidth: 1,
+                            borderColor: Color.Primary,
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
+                    >
+                        <Icon
+                            fill={Color.Primary}
+                            name="arrow-ios-downward-outline"
+                            style={{ width: 13, height: 13 }}
+                        />
+                    </View>
                 </TouchableOpacity>
             </View>
             <TarotStoryDecorations data={data.current[index]} />
+            <Modal
+                title="산책로 선택"
+                visible={modalVisible}
+                setVisible={setModalVisible}
+            >
+                {contents.map((item, idx) => (
+                    <Button
+                        key={item}
+                        size={ButtonSize.L}
+                        text={item}
+                        buttonStyle={
+                            index !== idx && {
+                                backgroundColor: Color.White,
+                                borderWidth: 1,
+                                borderColor: Color.Primary,
+                            }
+                        }
+                        textStyle={index !== idx && { color: Color.Primary }}
+                        onPress={() => {
+                            setIndex(idx);
+                            setModalVisible(false);
+                        }}
+                    />
+                ))}
+            </Modal>
         </Screen>
     );
 }
@@ -103,7 +160,7 @@ const Major: StoryRoadItemProp[] = [
     {
         text: "The Fool",
         onPress: () => {},
-        disabled: true,
+        disabled: false,
         Decoration: Tree,
         DisabledDecoration: TreeDisabled,
     },
@@ -117,7 +174,7 @@ const Major: StoryRoadItemProp[] = [
     {
         text: "The High Priestess",
         onPress: () => {},
-        disabled: true,
+        disabled: false,
         Decoration: Tree,
         DisabledDecoration: TreeDisabled,
     },
@@ -148,7 +205,7 @@ const MinorWand: StoryRoadItemProp[] = [
     {
         text: "King of Wands",
         onPress: () => {},
-        disabled: true,
+        disabled: false,
         Decoration: Wand,
         DisabledDecoration: WandDisabled,
     },
@@ -162,7 +219,7 @@ const MinorWand: StoryRoadItemProp[] = [
     {
         text: "II of Wands",
         onPress: () => {},
-        disabled: true,
+        disabled: false,
         Decoration: Wand,
         DisabledDecoration: WandDisabled,
     },
