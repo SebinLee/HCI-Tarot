@@ -134,8 +134,9 @@ const ChatInputBottomSheet = ({ tarots, onPressSend }: ChatInputTarotProps) => {
                     <TouchableOpacity
                         style={style.sendButton}
                         onPress={() => {
-                            onPressSend();
-                            setCurrent(current + 1);
+                            onPressSend(text, setAnswer, setCurrent);
+                            setText("");
+                            setSelected(-1);
                         }}
                     >
                         <Icon

@@ -11,8 +11,8 @@ export interface ChatInputTarotProps extends TextInputProps {
     tarots: TarotKeyword[];
     onPressSend: (
         text: string,
-        answer: string[],
         setAnswer: React.Dispatch<React.SetStateAction<string[]>>,
+        setCurrent: React.Dispatch<React.SetStateAction<number>>,
     ) => void;
 }
 

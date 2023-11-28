@@ -1,6 +1,5 @@
 import firestore from "@react-native-firebase/firestore";
 import { Alert } from "react-native";
-import { IMessage } from "react-native-gifted-chat";
 
 export default async function GetPracticeBotData(docID = "") {
     return await firestore()
@@ -15,20 +14,6 @@ export default async function GetPracticeBotData(docID = "") {
             );
             return null;
         });
-}
-
-export function WrapIMessage(chat: string) {
-    const message: IMessage = {
-        _id: Date.now(),
-        text: chat,
-        createdAt: Date.now(),
-        user: {
-            _id: "system",
-            name: "타로봇",
-        },
-    };
-
-    return message;
 }
 
 export interface FirebaseChat {

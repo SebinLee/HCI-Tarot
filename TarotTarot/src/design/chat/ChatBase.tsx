@@ -1,6 +1,6 @@
-import React from "react";
-import { Dimensions, View } from "react-native";
-import { GiftedChat } from "react-native-gifted-chat";
+import React, { useEffect, useRef } from "react";
+import { Dimensions, FlatList, View } from "react-native";
+import { GiftedChat, IMessage } from "react-native-gifted-chat";
 import { useAppSelector } from "../../library/redux/ReduxStore";
 import { ChatBaseProps } from "./ChatInterface";
 import ChatInputProp from "./ChatInputProp";
@@ -16,9 +16,17 @@ export default function ChatBase({
         (state) => state.userInfo,
     );
 
+    const chatRef = useRef<FlatList<IMessage> | null>(null);
+
+    useEffect(() => {
+        if (message.length > 0 && chatRef !== null)
+            chatRef.current?.scrollToEnd();
+    }, [message]);
+
     return (
         <View style={{ flex: 1 }}>
             <GiftedChat
+                messageContainerRef={chatRef}
                 user={{
                     _id: id,
                     name: username,
@@ -44,6 +52,7 @@ export default function ChatBase({
                 alwaysShowSend={true}
                 alignTop={true}
                 inverted={false}
+                scrollToBottom={true}
                 messagesContainerStyle={{
                     paddingBottom:
                         contentRoute === "draw"

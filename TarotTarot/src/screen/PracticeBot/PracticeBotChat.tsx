@@ -3,10 +3,13 @@ import { IMessage } from "react-native-gifted-chat";
 import GetPracticeBotData from "../../library/firebase/GetPracticeBotData";
 import ChatBase from "../../design/chat/ChatBase";
 import Screen from "../../design/Screen";
-import AppendMessage from "../../library/practiceBot/AppendMessage";
-import ParseChips from "../../library/practiceBot/ParseChip";
+
 import { ChatInputChipProps } from "../../design/chat/ChatInterface";
 import { useAppSelector } from "../../library/redux/ReduxStore";
+import WritePracticeBotAnswer from "../../library/firebase/WritePracticeBotAnswer";
+import CreateMessage from "../../library/practiceBot/CreateMessage";
+import AppendMessage from "../../library/practiceBot/AppendMessage";
+import ParseChips from "../../library/practiceBot/ParseChip";
 
 export default function PracticeBotChat({ navigation, route }) {
     const bottomChips = useRef<Record<string, ChatInputChipProps[]>>({});
@@ -33,6 +36,7 @@ export default function PracticeBotChat({ navigation, route }) {
                     setContentRoute,
                     setMessage,
                     setShowBottomAcc,
+                    navigation,
                 );
                 setServerData({ tarotCards, data });
                 AppendMessage(data[contentRoute], setMessage, setShowBottomAcc);
@@ -42,8 +46,48 @@ export default function PracticeBotChat({ navigation, route }) {
 
     // ---------------------------------------------------------------------------------
 
-    const onPressSend = () => {
-        console.log("onPress");
+    const onPressSend = async (
+        text: string,
+        setAnswer: React.Dispatch<React.SetStateAction<string[]>>,
+        setCurrent: React.Dispatch<React.SetStateAction<number>>,
+    ) => {
+        const { id, username, profilePic } = userInfo;
+
+        setAnswer((prev) => {
+            const newData = [...prev, text];
+            if (newData.length >= serverData.tarotCards.length) {
+                console.log("Please Submit data here");
+
+                WritePracticeBotAnswer(
+                    route.params.id,
+                    newData,
+                    id,
+                    profilePic,
+                    username,
+                ).then(() => {
+                    setContentRoute("finish");
+                    AppendMessage(
+                        serverData.data["finish"],
+                        setMessage,
+                        setShowBottomAcc,
+                    );
+                });
+            }
+
+            return newData;
+        });
+
+        setMessage((prev) => [
+            ...prev,
+            CreateMessage(text, {
+                _id: id,
+                name: username,
+                avatar: profilePic,
+            }),
+        ]);
+        setCurrent((prev) =>
+            Math.min(serverData.tarotCards.length - 1, prev + 1),
+        );
     };
 
     return (

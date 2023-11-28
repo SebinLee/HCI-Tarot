@@ -1,9 +1,10 @@
 import { IMessage } from "react-native-gifted-chat";
+import { CommonActions } from "@react-navigation/native";
 import { ChatInputChipProps } from "../../design/chat/ChatInterface";
 import { ServerMessages } from "./PracticeBotInterface";
+import { UserInfo } from "../redux/UserInfoReducer";
 import CreateMessage from "./CreateMessage";
 import AppendMessage from "./AppendMessage";
-import { UserInfo } from "../redux/UserInfoReducer";
 
 export default function ParseChips(
     data: ServerMessages,
@@ -11,6 +12,7 @@ export default function ParseChips(
     setContentRoute: React.Dispatch<React.SetStateAction<string>>,
     setMessage: React.Dispatch<React.SetStateAction<IMessage[]>>,
     setShowChips: React.Dispatch<React.SetStateAction<boolean>>,
+    navigation: any,
 ): Record<string, ChatInputChipProps[]> {
     const { id, username, profilePic } = userInfo;
     const routeKeys = Object.keys(data);
@@ -39,7 +41,10 @@ export default function ParseChips(
                         avatar: profilePic,
                     }),
                 ]);
-                setContentRoute(chip.route);
+
+                // If the chip is displayed at finish stage, then route to other screen
+                if (key === "finish") navigation.navigate(chip.route);
+                else setContentRoute(chip.route);
 
                 if (chip.route !== "draw") {
                     AppendMessage(data[chip.route], setMessage, setShowChips);
