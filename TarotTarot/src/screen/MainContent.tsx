@@ -3,11 +3,12 @@ import {
     BottomTabNavigationOptions,
     createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
-import TarotForest from "./TarotForest/TarotForest";
-import MyTarot from "./MyTarot/MyTarot";
-import PracticeBot from "./PracticeBot/PracticeBotMain";
+
+import DailyReadingRouting from "./DailyReading/DailyReadingRouting";
 import CommentaryRoute from "./Commentary/CommentaryRoute";
+import PracticeBot from "./PracticeBot/PracticeBotMain";
 import Dictionary from "./Dictonary/Dictonary";
+import MyTarot from "./MyTarot/MyTarot";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,8 +20,8 @@ export default function MainContent() {
     return (
         <Tab.Navigator>
             <Tab.Screen
-                name="TarotForest"
-                component={TarotForest}
+                name="DailyReaing"
+                component={DailyReadingRouting}
                 options={screenOption}
             />
             <Tab.Screen

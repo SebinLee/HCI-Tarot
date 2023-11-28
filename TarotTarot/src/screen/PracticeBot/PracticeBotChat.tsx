@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { IMessage } from "react-native-gifted-chat";
-import GetPracticeBotData from "../../library/firebase/GetPracticeBotData";
+
+import { NavigationPropEnum } from "../../design/layout/LayoutInterface";
+import { ChatInputChipProps } from "../../design/chat/ChatInterface";
 import ChatBase from "../../design/chat/ChatBase";
 import Screen from "../../design/Screen";
 
-import { ChatInputChipProps } from "../../design/chat/ChatInterface";
 import { useAppSelector } from "../../library/redux/ReduxStore";
 import WritePracticeBotAnswer from "../../library/firebase/WritePracticeBotAnswer";
+import GetPracticeBotData from "../../library/firebase/GetPracticeBotData";
 import CreateMessage from "../../library/practiceBot/CreateMessage";
 import AppendMessage from "../../library/practiceBot/AppendMessage";
 import ParseChips from "../../library/practiceBot/ParseChip";
@@ -92,7 +94,11 @@ export default function PracticeBotChat({ navigation, route }) {
     };
 
     return (
-        <Screen title="Chats" horizontalPadding={false}>
+        <Screen
+            title="Chats"
+            horizontalPadding={false}
+            navigationLeftProp={NavigationPropEnum.hide}
+        >
             <ChatBase
                 chips={bottomChips.current}
                 showBottomAccessory={showBottomAcc}

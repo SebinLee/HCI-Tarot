@@ -19,8 +19,8 @@ export default function PostButton({
             style={{
                 position: "absolute",
                 alignItems: "flex-end",
-                bottom: Dimensions.get("screen").height * 0.05,
-                right: Dimensions.get("screen").width * 0.02,
+                bottom: Dimensions.get("screen").height * 0.13,
+                right: 0,
             }}
         >
             <TouchableOpacity
