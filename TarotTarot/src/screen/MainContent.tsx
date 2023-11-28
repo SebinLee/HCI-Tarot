@@ -7,8 +7,8 @@ import {
 import DailyReadingRouting from "./DailyReading/DailyReadingRouting";
 import CommentaryRoute from "./Commentary/CommentaryRoute";
 import PracticeBot from "./PracticeBot/PracticeBotMain";
+import TarotStory from "./TarotStory/TarotStory";
 import Dictionary from "./Dictonary/Dictonary";
-import MyTarot from "./MyTarot/MyTarot";
 
 const Tab = createBottomTabNavigator();
 
@@ -25,8 +25,8 @@ export default function MainContent() {
                 options={screenOption}
             />
             <Tab.Screen
-                name="MyTarot"
-                component={MyTarot}
+                name="TarotStory"
+                component={TarotStory}
                 options={screenOption}
             />
             <Tab.Screen
