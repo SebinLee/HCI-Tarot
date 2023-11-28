@@ -78,7 +78,7 @@ export default function NavigationBarBase({
             accessoryLeft={LeftButton}
             accessoryRight={RightButton}
             title={() => (
-                <Text type={TextType.H2} color={navigationPropColor}>
+                <Text type={TextType.H2} color={Color.Primary}>
                     {title}
                 </Text>
             )}

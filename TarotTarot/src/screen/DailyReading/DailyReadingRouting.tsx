@@ -5,6 +5,7 @@ import {
 } from "@react-navigation/stack";
 import DailyReadingMain from "./DailyReadingMain";
 import DailyReadingWriting from "./DailyReadingWrite";
+import DailyReadingView from "./DailyReadingView";
 
 export default function DailyReadingRouting({ navigation, route }) {
     const Stack = createStackNavigator();
@@ -26,7 +27,7 @@ export default function DailyReadingRouting({ navigation, route }) {
             />
             <Stack.Screen
                 name="DailyReadingView"
-                component={DailyReadingWriting}
+                component={DailyReadingView}
                 options={screenOption}
             />
         </Stack.Navigator>

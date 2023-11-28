@@ -1,4 +1,4 @@
-export default function CalculateDays(createdAt: string) {
+export default function CalculateDays(createdAt: string, current = new Date()) {
     if (!createdAt) return 0;
 
     const oneDayInMillis = 1000 * 60 * 60 * 24;
@@ -7,6 +7,6 @@ export default function CalculateDays(createdAt: string) {
         createdAtInMillis - (createdAtInMillis % oneDayInMillis);
 
     return Math.floor(
-        (new Date().getTime() - createdAtRemoveTime) / oneDayInMillis + 1,
+        (current.getTime() - createdAtRemoveTime) / oneDayInMillis + 1,
     );
 }

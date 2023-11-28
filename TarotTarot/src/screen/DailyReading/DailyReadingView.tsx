@@ -1,11 +1,21 @@
 import React from "react";
-import Screen from "../../design/Screen";
-import { Text } from "../../design/Text";
+import { ScrollView } from "react-native";
 
-export default function DailyReadingView() {
+import Screen from "../../design/Screen";
+import DateTitle from "../../design/dailyReading/DateTitle";
+import { Text, TextType } from "../../design/Text";
+import DisplayTarotCard from "../../design/dailyReading/DisplayTarotCard";
+
+export default function DailyReadingView({ navigation, route }) {
+    const { data, datedata } = route?.params;
+
     return (
         <Screen title="데일리 리딩">
-            <Text>Implement Writing Here!</Text>
+            <ScrollView>
+                <DateTitle {...datedata} />
+                <DisplayTarotCard index={data.index} />
+                <Text style={{ marginTop: 15 }}>{data.content}</Text>
+            </ScrollView>
         </Screen>
     );
 }

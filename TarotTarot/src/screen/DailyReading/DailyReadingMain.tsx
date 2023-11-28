@@ -1,55 +1,74 @@
 import React, { useEffect, useState } from "react";
-import Screen from "../../design/Screen";
-import { Text } from "../../design/Text";
-import { NavigationPropEnum } from "../../design/layout/LayoutInterface";
-import PostButton from "../../design/PostButton";
-import { Dimensions, View } from "react-native";
+import { Alert, Dimensions, StyleSheet, View } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
 import { Calendar, DateData } from "react-native-calendars";
+
 import Color from "../../design/Color";
+import Screen from "../../design/Screen";
+import PostButton from "../../design/PostButton";
+import { NavigationPropEnum } from "../../design/layout/LayoutInterface";
+import { Text } from "../../design/Text";
+
 import { useAppSelector } from "../../library/redux/ReduxStore";
 import CalculateDays from "../../library/dailyReading/CalculateDays";
+import GetDailyReadingLists from "../../library/dailyReading/GetDailyReading";
+import GetTodayDateData from "../../library/dailyReading/GetTodayDateData";
+import FastImage from "react-native-fast-image";
 
 export default function DailyReadingMain({ navigation }) {
-    const { createdAt } = useAppSelector((state) => state.userInfo);
+    const isFocused = useIsFocused();
+    const { createdAt, id } = useAppSelector((state) => state.userInfo);
+
     const [day, setDay] = useState(0);
-    const [selected, setSelected] = useState("");
-    const [markedDate, setMarkedDate] = useState({
-        "2023-11-06": { marked: true },
-    });
+    const [markedDate, setMarkedDate] = useState({});
+    const [dailyTarot, setDailyTarot] = useState({});
 
     useEffect(() => {
-        console.log(typeof createdAt);
-        setDay(CalculateDays(createdAt));
-    }, []);
+        if (isFocused) {
+            setDay(CalculateDays(createdAt));
+            GetDailyReadingLists(id)
+                .then((res) => {
+                    if (res) {
+                        // Parse daily reading date and append to markedDate
+                        setMarkedDate((prev) => {
+                            Object.keys(res).forEach((value) => {
+                                prev = { ...prev, [value]: { marked: true } };
+                            });
 
-    const Title = () => (
-        <Text style={{}}>
-            타로 공부한지{" "}
-            <Text
-                style={{ fontSize: 40, fontWeight: "200", fontStyle: "italic" }}
-            >
-                {day}
-            </Text>
-            일째
-        </Text>
-    );
+                            return prev;
+                        });
+
+                        // Store loaded daily tarots.
+                        setDailyTarot({ ...res });
+                    }
+                })
+                .catch(() => {
+                    Alert.alert(
+                        "통신 오류",
+                        "데일리 리딩 정보를 가져오던 중 오류가 발생했습니다. 다시 시도해주세요",
+                    );
+                });
+        }
+    }, [isFocused]);
 
     const onPressDate = (day: DateData) => {
-        const exist = Object.keys(markedDate).includes(day.dateString);
-
-        if (exist) {
+        if (Object.keys(markedDate).includes(day.dateString)) {
             navigation.push("DailyReadingView", {
-                id: day.dateString,
+                //@ts-ignore
+                data: dailyTarot[day.dateString],
+                datedata: day,
             });
-        } else {
-            setSelected(day.dateString);
         }
     };
 
     const onPressWrite = () => {
-        navigation.push("DailyReadingWrite", {
-            id: "today",
-        });
+        const { dateString } = GetTodayDateData();
+        if (Object.keys(dailyTarot).includes(dateString)) {
+            Alert.alert("작성 완료", "이미 오늘의 데일리 리딩을 작성했어요");
+            return;
+        } else {
+            navigation.push("DailyReadingWrite");
+        }
     };
 
     return (
@@ -57,14 +76,17 @@ export default function DailyReadingMain({ navigation }) {
             title="데일리 리딩"
             navigationLeftProp={NavigationPropEnum.hide}
         >
-            <View style={{ alignItems: "center" }}>
-                <Title />
+            <View style={style.container}>
+                <Text>
+                    타로 공부한지 <Text style={style.textDays}>{day}</Text> 일째
+                </Text>
+                <FastImage
+                    source={require("../../design/assets/decoration-main.png")}
+                    style={{ width: 100, height: 60, marginTop: 30 }}
+                    resizeMode="contain"
+                />
                 <Calendar
-                    markingType="custom"
-                    style={{
-                        marginTop: 30,
-                        width: Dimensions.get("screen").width * 0.8,
-                    }}
+                    style={style.calendar}
                     theme={{
                         arrowColor: Color.Primary,
 
@@ -73,9 +95,11 @@ export default function DailyReadingMain({ navigation }) {
                         selectedDayTextColor: Color.White,
                         indicatorColor: Color.Primary,
 
-                        todayTextColor: Color.Primary_dark,
+                        todayTextColor: Color.Black,
+                        todayBackgroundColor: "#80dfb166",
                         monthTextColor: Color.Primary,
                         dayTextColor: "#222222",
+                        dotColor: Color.Primary,
 
                         // Define font family and size for texts
                         textDayFontFamily: "monospace",
@@ -84,18 +108,28 @@ export default function DailyReadingMain({ navigation }) {
                         textDayFontWeight: "300",
                         textMonthFontWeight: "500",
                         textDayHeaderFontWeight: "300",
-                        textDayFontSize: 13,
+                        textDayFontSize: 14,
                         textMonthFontSize: 16,
                         textDayHeaderFontSize: 13,
                     }}
                     onDayPress={onPressDate}
-                    markedDates={{
-                        ...markedDate,
-                        [selected]: { selected: true },
-                    }}
+                    markedDates={{ ...markedDate }}
                 />
             </View>
             <PostButton onPress={onPressWrite} />
         </Screen>
     );
 }
+
+const style = StyleSheet.create({
+    container: { alignItems: "center" },
+    textDays: {
+        fontSize: 40,
+        fontWeight: "200",
+        fontStyle: "italic",
+    },
+    calendar: {
+        marginTop: 30,
+        width: Dimensions.get("screen").width * 0.8,
+    },
+});

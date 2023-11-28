@@ -40,7 +40,7 @@ export const ButtonStyle = StyleSheet.create({
 
 export const ButtonColor = {
     SolidDisabled: {
-        Button: Color.Primary_light,
+        Button: Color.Gray,
         Text: Color.White,
     },
 
