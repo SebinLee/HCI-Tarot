@@ -44,12 +44,15 @@ export default function ParseChips(
 
                 // If the chip is displayed at finish stage, then route to other screen
                 if (key === "finish") navigation.navigate(chip.route);
-                else setContentRoute(chip.route);
-
-                if (chip.route !== "draw") {
-                    AppendMessage(data[chip.route], setMessage, setShowChips);
-                } else {
-                    setShowChips(true);
+                else {
+                    setContentRoute(chip.route);
+                    if (chip.route !== "draw")
+                        AppendMessage(
+                            data[chip.route],
+                            setMessage,
+                            setShowChips,
+                        );
+                    else setShowChips(true);
                 }
             },
         }));

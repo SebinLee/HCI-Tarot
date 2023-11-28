@@ -65,6 +65,7 @@ export default function PracticeBotChat({ navigation, route }) {
                     profilePic,
                     username,
                 ).then(() => {
+                    setShowBottomAcc(false);
                     setContentRoute("finish");
                     AppendMessage(
                         serverData.data["finish"],
