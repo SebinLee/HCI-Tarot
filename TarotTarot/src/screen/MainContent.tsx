@@ -7,6 +7,7 @@ import TarotForest from "./TarotForest/TarotForest";
 import MyTarot from "./MyTarot/MyTarot";
 import PracticeBot from "./PracticeBot/PracticeBotMain";
 import CommentaryRoute from "./Commentary/CommentaryRoute";
+import Dictionary from "./Dictonary/Dictonary";
 
 const Tab = createBottomTabNavigator();
 
@@ -35,6 +36,11 @@ export default function MainContent() {
             <Tab.Screen
                 name="해석 리스트"
                 component={CommentaryRoute}
+                options={screenOption}
+            />
+            <Tab.Screen
+                name="TarotDict"
+                component={Dictionary}
                 options={screenOption}
             />
         </Tab.Navigator>
