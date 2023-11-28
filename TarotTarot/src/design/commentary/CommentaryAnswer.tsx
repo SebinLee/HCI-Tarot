@@ -5,11 +5,7 @@ import { Text, TextType } from "../Text";
 import Color from "../Color";
 
 export default function CommentaryListElement({ ...props }) {
-    const answerArray = [
-        { title: "카드 1", content: props.Q1 },
-        { title: "카드 2", content: props.Q2 },
-        { title: "카드 3", content: props.Q3 },
-    ];
+    const { answer } = props;
 
     return (
         <View style={style.container}>
@@ -28,8 +24,8 @@ export default function CommentaryListElement({ ...props }) {
                 </Text>
             </View>
             <View style={style.answerContainer}>
-                {answerArray.map((item) => (
-                    <Answer title={item.title} content={item.content} />
+                {answer.map((content, index) => (
+                    <Answer title={`카드 ${index + 1}`} content={content} />
                 ))}
             </View>
         </View>

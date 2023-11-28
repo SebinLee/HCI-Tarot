@@ -20,6 +20,8 @@ export default function CommentaryPost({ route }) {
         <Screen title="해석 리스트">
             <FlatList
                 data={userComment}
+                contentContainerStyle={{ paddingBottom: 100 }}
+                showsVerticalScrollIndicator={false}
                 ListHeaderComponent={() => (
                     <CommentaryQuestion
                         topic={params.data.topic}
