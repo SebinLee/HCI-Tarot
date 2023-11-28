@@ -5,6 +5,7 @@ const initialState = {
     id: "",
     username: "",
     profilePic: "",
+    createdAt: "",
 };
 
 const userInfoSlice = createSlice({
@@ -15,6 +16,7 @@ const userInfoSlice = createSlice({
             state.id = action.payload.id;
             state.username = action.payload.username;
             state.profilePic = action.payload.profilePic;
+            state.createdAt = action.payload.createdAt;
         },
     },
 });

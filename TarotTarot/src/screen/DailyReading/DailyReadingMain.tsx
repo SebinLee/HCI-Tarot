@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Screen from "../../design/Screen";
 import { Text } from "../../design/Text";
 import { NavigationPropEnum } from "../../design/layout/LayoutInterface";
@@ -6,12 +6,21 @@ import PostButton from "../../design/PostButton";
 import { Dimensions, View } from "react-native";
 import { Calendar, DateData } from "react-native-calendars";
 import Color from "../../design/Color";
+import { useAppSelector } from "../../library/redux/ReduxStore";
+import CalculateDays from "../../library/dailyReading/CalculateDays";
 
 export default function DailyReadingMain({ navigation }) {
+    const { createdAt } = useAppSelector((state) => state.userInfo);
+    const [day, setDay] = useState(0);
     const [selected, setSelected] = useState("");
     const [markedDate, setMarkedDate] = useState({
         "2023-11-06": { marked: true },
     });
+
+    useEffect(() => {
+        console.log(typeof createdAt);
+        setDay(CalculateDays(createdAt));
+    }, []);
 
     const Title = () => (
         <Text style={{}}>
@@ -19,7 +28,7 @@ export default function DailyReadingMain({ navigation }) {
             <Text
                 style={{ fontSize: 40, fontWeight: "200", fontStyle: "italic" }}
             >
-                33
+                {day}
             </Text>
             일째
         </Text>

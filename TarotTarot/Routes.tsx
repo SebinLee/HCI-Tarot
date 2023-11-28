@@ -48,6 +48,7 @@ export default function Routes() {
                     id: user.uid,
                     username: user.displayName,
                     profilePic: user.photoURL,
+                    createdAt: user.metadata.creationTime,
                 }),
             );
         }
