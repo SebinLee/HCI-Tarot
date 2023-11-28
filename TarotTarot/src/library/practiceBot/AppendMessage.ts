@@ -1,27 +1,22 @@
-export default function AppendMessage(setserverData, setMessage) {
+import { IMessage } from "react-native-gifted-chat";
+import { ServerMessage } from "./PracticeBotInterface";
+import CreateMessage from "./CreateMessage";
+
+export default function AppendMessage(
+    serverMessage: ServerMessage,
+    setMessage: React.Dispatch<React.SetStateAction<IMessage[]>>,
+    setShowChips: React.Dispatch<React.SetStateAction<boolean>>,
+) {
+    const { messages } = serverMessage;
+    let idx = 0;
+
     const interval = setInterval(() => {
-        setserverData((prevData) => {
-            setMessage((prevMessage) => {
-                // Append Data
-                if (prevMessage.length < prevData.chats.length) {
-                    const dataToAppend = {
-                        _id: Date.now(),
-                        text: prevData.chats[prevMessage.length],
-                        createdAt: Date.now(),
-                        user: {
-                            _id: "system",
-                            name: "연애봇",
-                        },
-                    };
+        const dataToAppend = CreateMessage(messages[idx]);
+        setMessage((prev) => [...prev, dataToAppend]);
 
-                    return [...prevMessage, dataToAppend];
-                }
-
-                return [...prevMessage];
-            });
-            return { ...prevData };
-        });
-    }, 500);
-
-    return interval;
+        if (++idx === messages.length) {
+            setShowChips(true);
+            clearInterval(interval);
+        }
+    }, 700);
 }

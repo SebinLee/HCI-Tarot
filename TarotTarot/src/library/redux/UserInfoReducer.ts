@@ -21,3 +21,4 @@ const userInfoSlice = createSlice({
 
 export const { storeUserInfo } = userInfoSlice.actions;
 export default userInfoSlice.reducer;
+export type UserInfo = typeof initialState;

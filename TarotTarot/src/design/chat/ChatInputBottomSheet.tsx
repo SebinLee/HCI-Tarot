@@ -14,23 +14,21 @@ import React, {
 } from "react";
 import BottomSheet, { BottomSheetTextInput } from "@gorhom/bottom-sheet";
 import { BottomSheetModalMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
-import { ButtonSize } from "../button/ButtonInterface";
 import TarotCard, { TarotCardType } from "../TarotCard";
 import { ChatInputTarotProps } from "./ChatInterface";
 import {
-    TarotBase,
     TarotKeyword,
     TarotKeywordProps,
     TarotKeywordsProps,
 } from "../Tarot/TarotInterface";
 import { Text, TextType } from "../Text";
-import Button from "../Button";
 import Color from "../Color";
 import { Icon } from "@ui-kitten/components";
 
 const ChatInputBottomSheet = ({ tarots, onPressSend }: ChatInputTarotProps) => {
     // State for text input and tarot card selection
     const [text, setText] = useState("");
+    const [answer, setAnswer] = useState<string[]>([]);
     const [selected, setSelected] = useState(-1);
     const [current, setCurrent] = useState(0);
 
@@ -133,7 +131,6 @@ const ChatInputBottomSheet = ({ tarots, onPressSend }: ChatInputTarotProps) => {
                         onChangeText={(text) => setText(text)}
                         multiline={true}
                     />
-
                     <TouchableOpacity
                         style={style.sendButton}
                         onPress={() => {

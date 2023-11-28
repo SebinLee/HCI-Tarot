@@ -1,20 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Dimensions, View } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
 import { useAppSelector } from "../../library/redux/ReduxStore";
-import { ChatBaseProps, ChatInputProps, ChatInputTypes } from "./ChatInterface";
+import { ChatBaseProps } from "./ChatInterface";
 import ChatInputProp from "./ChatInputProp";
-import { TarotKeyword } from "../Tarot/TarotInterface";
 import ChatBubble from "./ChatBubble";
 
-/**
- * @description 채팅 화면을 렌더하는 Component입니다
- * @param {IMessage[]} message 현재 채팅방에 올라온 채팅들을 전달합니다
- * @param {string} text 현재 입력중인 텍스트를 전달합니다
- * @param {function} setText 현재 입력중인 텍스트를 변경할 수 있는 함수를 전달합니다.
- * @param {function} onSend 메세지 전송 버튼을 눌렀을 때 수행할 함수를 전달합니다.
- */
-export default function ChatBase({ type, message, ...props }: ChatBaseProps) {
+export default function ChatBase({
+    contentRoute,
+    message,
+    showBottomAccessory,
+    ...props
+}: ChatBaseProps) {
     const { id, username, profilePic } = useAppSelector(
         (state) => state.userInfo,
     );
@@ -30,9 +27,15 @@ export default function ChatBase({ type, message, ...props }: ChatBaseProps) {
                 messages={message}
                 // Add Custom Theme
                 // Did not render default time and day
-                renderInputToolbar={() => (
-                    <ChatInputProp {...props} type={type} multiline={true} />
-                )}
+                renderInputToolbar={() =>
+                    showBottomAccessory && (
+                        <ChatInputProp
+                            {...props}
+                            contentRoute={contentRoute}
+                            multiline={true}
+                        />
+                    )
+                }
                 renderTime={() => null}
                 renderDay={() => null}
                 renderBubble={ChatBubble}
@@ -43,7 +46,7 @@ export default function ChatBase({ type, message, ...props }: ChatBaseProps) {
                 inverted={false}
                 messagesContainerStyle={{
                     paddingBottom:
-                        type === "Input"
+                        contentRoute === "draw"
                             ? Dimensions.get("window").height * 0.28
                             : 10,
                 }}
@@ -51,27 +54,3 @@ export default function ChatBase({ type, message, ...props }: ChatBaseProps) {
         </View>
     );
 }
-
-// Dummy data for tarot card display
-const dummyTarots: TarotKeyword[] = [
-    {
-        index: 56,
-        topic: "연애",
-        keywords:
-            "test1, test2, test3, test4, test5, test3, test4, test5, test3, test4, test5",
-    },
-    {
-        index: 59,
-        topic: "금전",
-        keywords: "test1, test2, test3, test4, test5",
-    },
-    {
-        index: 77,
-        topic: "학업",
-        keywords: "test1, test2, test3, test4, test5",
-    },
-];
-
-const onPressSend = () => {
-    console.log("Implement Submit Function Here");
-};
