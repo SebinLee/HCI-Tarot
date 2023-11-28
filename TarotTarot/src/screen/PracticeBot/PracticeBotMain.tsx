@@ -6,12 +6,13 @@ import FastImage from "react-native-fast-image";
 import Color from "../../design/Color";
 import GetAvailableQuestions from "../../library/firebase/GetAvailableQuestions";
 import { useAppSelector } from "../../library/redux/ReduxStore";
+import { NavigationPropEnum } from "../../design/layout/LayoutInterface";
 
 export default function PracticeBot({ navigation }) {
     const { id } = useAppSelector((state) => state.userInfo);
 
     return (
-        <Screen title="연습봇">
+        <Screen title="연습봇" navigationLeftProp={NavigationPropEnum.hide}>
             <FlatList
                 data={data}
                 renderItem={({ item, index }) => (
@@ -39,7 +40,7 @@ export default function PracticeBot({ navigation }) {
 
 const Item = ({ title, description, onPress }) => (
     <TouchableOpacity
-        style={{ height: 80, borderBottomWidth: 1, justifyContent: "center" }}
+        style={{ height: 80, justifyContent: "center" }}
         onPress={onPress}
     >
         <View style={{ flexDirection: "row" }}>

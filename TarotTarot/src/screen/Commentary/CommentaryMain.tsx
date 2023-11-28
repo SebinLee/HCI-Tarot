@@ -4,6 +4,7 @@ import { FlatList } from "react-native";
 import GetPracticeQuestions from "../../library/firebase/GetPracticeQuestions";
 import CommentaryQuestionList from "../../design/commentary/CommentaryQuestionList";
 import CommentaryFilter from "../../design/commentary/CommentaryFilter";
+import { NavigationPropEnum } from "../../design/layout/LayoutInterface";
 
 export default function CommentaryMain({ navigation }) {
     const [questions, setQuestions] = useState([]);
@@ -30,7 +31,10 @@ export default function CommentaryMain({ navigation }) {
     }, [selectedChips]);
 
     return (
-        <Screen title="해석 리스트">
+        <Screen
+            title="해석 리스트"
+            navigationLeftProp={NavigationPropEnum.hide}
+        >
             <FlatList
                 data={displayData}
                 ListHeaderComponent={() => (
