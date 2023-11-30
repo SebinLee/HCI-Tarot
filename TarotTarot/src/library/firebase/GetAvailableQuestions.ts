@@ -1,5 +1,4 @@
 import firestore from "@react-native-firebase/firestore";
-import { useAppSelector } from "../redux/ReduxStore";
 import { Alert } from "react-native";
 
 export default async function GetAvailableQuestions(
