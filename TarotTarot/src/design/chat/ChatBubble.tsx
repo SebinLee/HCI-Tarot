@@ -21,12 +21,14 @@ export default function ChatBubble({ ...props }: BubbleProps<IMessage>) {
 
 const styles = StyleSheet.create({
     customBubbleWrapperLeft: {
+        marginVertical: 2,
         backgroundColor: "#F0F0F0",
         borderRadius: 15,
         padding: 5,
     },
 
     customBubbleWrapperRight: {
+        marginVertical: 2,
         backgroundColor: Color.Primary,
         borderRadius: 15,
         padding: 5,

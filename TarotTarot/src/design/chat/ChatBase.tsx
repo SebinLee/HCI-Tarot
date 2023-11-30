@@ -47,12 +47,18 @@ export default function ChatBase({
                 renderTime={() => null}
                 renderDay={() => null}
                 renderBubble={ChatBubble}
-                // renderAvatar={CustomAvatar}
+                imageStyle={{
+                    //@ts-ignore
+                    resizeMode: "contain",
+                    width: Dimensions.get("window").width * 0.5,
+                    height: Dimensions.get("window").width * 0.5,
+                }}
                 renderAvatarOnTop={true}
                 alwaysShowSend={true}
                 alignTop={true}
                 inverted={false}
                 scrollToBottom={true}
+                showUserAvatar={true}
                 messagesContainerStyle={{
                     paddingBottom:
                         contentRoute === "draw"

@@ -3,13 +3,11 @@ export default function CreateMessage(
     user = {
         _id: "system",
         name: "상담자",
-        avatar: "",
+        avatar: require("../../design/assets/logo-primary.png"),
     },
 ) {
-    return {
-        _id: Date.now(),
-        createdAt: Date.now(),
-        text,
-        user,
-    };
+    const data = { _id: Date.now(), createdAt: Date.now(), user };
+
+    if (text.includes("http")) return { ...data, image: text };
+    else return { ...data, text };
 }
