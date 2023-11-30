@@ -3,7 +3,6 @@ import Screen from "../design/Screen";
 import { NavigationPropEnum } from "../design/layout/LayoutInterface";
 import { TouchableOpacity } from "react-native";
 import { Text, TextType } from "../design/Text";
-import ChatBase from "../design/chat/ChatBase";
 
 export default function Home() {
     return (
