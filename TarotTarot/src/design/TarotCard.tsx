@@ -13,9 +13,9 @@ export default function TarotCard({ index = 0, size = 100 }) {
 
 // Index
 // 0 - 21: MAJOR ARCANA
-// 22 - 35: MINOR - Wand
+// 22 - 35: MINOR - Wands
 // 36 - 49: MINOR - Cup
-// 50 - 63: MINOR - Sword
+// 50 - 63: MINOR - Swords
 // 64 - 77: MINOR - Pentacle
 export const TarotCardType = [
     // MAJOR ARCANA
@@ -44,21 +44,21 @@ export const TarotCardType = [
     { card: "The Sun", source: require("./assets/tarotCard/19.jpg") },
     { card: "The Judgement", source: require("./assets/tarotCard/20.jpg") },
     { card: "The World", source: require("./assets/tarotCard/21.jpg") },
-    // MINOR ARCANA - Wand (22-35)
-    { card: "Ace of Wand", source: require("./assets/tarotCard/22.jpg") },
-    { card: "Two of Wand", source: require("./assets/tarotCard/23.jpg") },
-    { card: "Three of Wand", source: require("./assets/tarotCard/24.jpg") },
-    { card: "Four of Wand", source: require("./assets/tarotCard/25.jpg") },
-    { card: "Five of Wand", source: require("./assets/tarotCard/26.jpg") },
-    { card: "Six of Wand", source: require("./assets/tarotCard/27.jpg") },
-    { card: "Seven of Wand", source: require("./assets/tarotCard/28.jpg") },
-    { card: "Eight of Wand", source: require("./assets/tarotCard/29.jpg") },
-    { card: "Nine of Wand", source: require("./assets/tarotCard/30.jpg") },
-    { card: "Ten of Wand", source: require("./assets/tarotCard/31.jpg") },
-    { card: "Page of Wand", source: require("./assets/tarotCard/32.jpg") },
-    { card: "Knight of Wand", source: require("./assets/tarotCard/33.jpg") },
-    { card: "Queen of Wand", source: require("./assets/tarotCard/34.jpg") },
-    { card: "King of Wand", source: require("./assets/tarotCard/35.jpg") },
+    // MINOR ARCANA - Wands (22-35)
+    { card: "Ace of Wands", source: require("./assets/tarotCard/22.jpg") },
+    { card: "Two of Wands", source: require("./assets/tarotCard/23.jpg") },
+    { card: "Three of Wands", source: require("./assets/tarotCard/24.jpg") },
+    { card: "Four of Wands", source: require("./assets/tarotCard/25.jpg") },
+    { card: "Five of Wands", source: require("./assets/tarotCard/26.jpg") },
+    { card: "Six of Wands", source: require("./assets/tarotCard/27.jpg") },
+    { card: "Seven of Wands", source: require("./assets/tarotCard/28.jpg") },
+    { card: "Eight of Wands", source: require("./assets/tarotCard/29.jpg") },
+    { card: "Nine of Wands", source: require("./assets/tarotCard/30.jpg") },
+    { card: "Ten of Wands", source: require("./assets/tarotCard/31.jpg") },
+    { card: "Page of Wands", source: require("./assets/tarotCard/32.jpg") },
+    { card: "Knight of Wands", source: require("./assets/tarotCard/33.jpg") },
+    { card: "Queen of Wands", source: require("./assets/tarotCard/34.jpg") },
+    { card: "King of Wands", source: require("./assets/tarotCard/35.jpg") },
     // MINOR ARCANA - Cups (36-49)
     { card: "Ace of Cups", source: require("./assets/tarotCard/36.jpg") },
     { card: "Two of Cups", source: require("./assets/tarotCard/37.jpg") },
@@ -74,21 +74,21 @@ export const TarotCardType = [
     { card: "Knight of Cups", source: require("./assets/tarotCard/47.jpg") },
     { card: "Queen of Cups", source: require("./assets/tarotCard/48.jpg") },
     { card: "King of Cups", source: require("./assets/tarotCard/49.jpg") },
-    // MINOR ARCANA - SWORD (50-63)
-    { card: "Ace of Sword", source: require("./assets/tarotCard/50.jpg") },
-    { card: "Two of Sword", source: require("./assets/tarotCard/51.jpg") },
-    { card: "Three of Sword", source: require("./assets/tarotCard/52.jpg") },
-    { card: "Four of Sword", source: require("./assets/tarotCard/53.jpg") },
-    { card: "Five of Sword", source: require("./assets/tarotCard/54.jpg") },
-    { card: "Six of Sword", source: require("./assets/tarotCard/55.jpg") },
-    { card: "Seven of Sword", source: require("./assets/tarotCard/56.jpg") },
-    { card: "Eight of Sword", source: require("./assets/tarotCard/57.jpg") },
-    { card: "Nine of Sword", source: require("./assets/tarotCard/58.jpg") },
-    { card: "Ten of Sword", source: require("./assets/tarotCard/59.jpg") },
-    { card: "Page of Sword", source: require("./assets/tarotCard/60.jpg") },
-    { card: "Knight of Sword", source: require("./assets/tarotCard/61.jpg") },
-    { card: "Queen of Sword", source: require("./assets/tarotCard/62.jpg") },
-    { card: "King of Sword", source: require("./assets/tarotCard/63.jpg") },
+    // MINOR ARCANA - Swords (50-63)
+    { card: "Ace of Swords", source: require("./assets/tarotCard/50.jpg") },
+    { card: "Two of Swords", source: require("./assets/tarotCard/51.jpg") },
+    { card: "Three of Swords", source: require("./assets/tarotCard/52.jpg") },
+    { card: "Four of Swords", source: require("./assets/tarotCard/53.jpg") },
+    { card: "Five of Swords", source: require("./assets/tarotCard/54.jpg") },
+    { card: "Six of Swords", source: require("./assets/tarotCard/55.jpg") },
+    { card: "Seven of Swords", source: require("./assets/tarotCard/56.jpg") },
+    { card: "Eight of Swords", source: require("./assets/tarotCard/57.jpg") },
+    { card: "Nine of Swords", source: require("./assets/tarotCard/58.jpg") },
+    { card: "Ten of Swords", source: require("./assets/tarotCard/59.jpg") },
+    { card: "Page of Swords", source: require("./assets/tarotCard/60.jpg") },
+    { card: "Knight of Swords", source: require("./assets/tarotCard/61.jpg") },
+    { card: "Queen of Swords", source: require("./assets/tarotCard/62.jpg") },
+    { card: "King of Swords", source: require("./assets/tarotCard/63.jpg") },
     // MINOR ARCANA - PENTACLE(64-77)
     { card: "Ace of Pentacles", source: require("./assets/tarotCard/64.jpg") },
     { card: "Two of Pentacles", source: require("./assets/tarotCard/65.jpg") },
