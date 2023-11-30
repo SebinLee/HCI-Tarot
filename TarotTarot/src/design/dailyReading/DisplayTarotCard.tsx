@@ -7,14 +7,14 @@ export default function DisplayTarotCard({ index }) {
     if (index < 0 || TarotCardType.length <= index) return null;
 
     return (
-        <View style={{ marginVertical: 5, alignItems: "center" }}>
+        <View style={{ marginVertical: 30, alignItems: "center" }}>
             <TarotCard
                 index={index}
                 size={Dimensions.get("window").height * 0.3}
             />
             <Text
                 type={TextType.H3}
-                color={Color.Primary}
+                color={Color.Primary_dark}
                 style={{ marginVertical: 3, fontWeight: "700" }}
             >
                 {TarotCardType[index].card}
