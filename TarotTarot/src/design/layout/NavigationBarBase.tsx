@@ -10,7 +10,7 @@ export default function NavigationBarBase({
     title = "",
     navigationLeftProp = NavigationPropEnum.back,
     navigationRightProp = NavigationPropEnum.hide,
-    navigationPropColor = Color.Black,
+    navigationPropColor = Color.Primary,
     onLeftPropPress,
     onRightPropPress,
 }: NavigationBaseProp) {
@@ -78,7 +78,7 @@ export default function NavigationBarBase({
             accessoryLeft={LeftButton}
             accessoryRight={RightButton}
             title={() => (
-                <Text type={TextType.H2} color={Color.Primary}>
+                <Text type={TextType.H2} color={navigationPropColor}>
                     {title}
                 </Text>
             )}

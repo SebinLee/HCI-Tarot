@@ -37,11 +37,11 @@ const Answer = ({ title = "카드 1", content = "" }) => (
         <Text
             color={Color.Primary_dark}
             type={TextType.Body2}
-            style={{ marginBottom: 3, fontWeight: "700" }}
+            style={{ marginBottom: 5, fontWeight: "700" }}
         >
             {title}
         </Text>
-        <Text color={Color.Primary_dark} type={TextType.Caption}>
+        <Text color="#3e7a5ddd" type={TextType.Caption}>
             {content}
         </Text>
     </View>

@@ -15,7 +15,7 @@ export default function CommentaryQuestion({
             <View style={{ alignItems: "flex-start" }}>
                 <Text
                     style={{
-                        backgroundColor: Color.Primary_dark,
+                        backgroundColor: Color.Primary,
                         paddingHorizontal: 5,
                         paddingVertical: 3,
                         marginBottom: 10,
@@ -26,12 +26,12 @@ export default function CommentaryQuestion({
                     {topic}
                 </Text>
             </View>
-            <Text color={Color.Primary_dark} type={TextType.H1}>
+            <Text color={Color.Primary} type={TextType.H1}>
                 Q. {question}
             </Text>
             <Text
                 style={{ marginVertical: 15 }}
-                color={Color.Primary_dark}
+                color={Color.Primary}
                 type={TextType.Body1}
             >
                 {description}
@@ -48,7 +48,7 @@ export default function CommentaryQuestion({
             </View>
             <Text
                 style={{ marginVertical: 10 }}
-                color={Color.Primary_dark}
+                color={Color.Primary}
                 type={TextType.H1}
             >
                 답변

@@ -14,7 +14,7 @@ export default function CommentaryQuestionList({
                 <View style={{ alignItems: "flex-start" }}>
                     <Text
                         style={{
-                            backgroundColor: Color.Primary_dark,
+                            backgroundColor: Color.Primary,
                             paddingHorizontal: 5,
                             paddingVertical: 3,
                             marginBottom: 10,
@@ -25,7 +25,7 @@ export default function CommentaryQuestionList({
                         {topic}
                     </Text>
                 </View>
-                <Text type={TextType.H2} color={Color.Primary_dark}>
+                <Text type={TextType.H2} color={Color.Primary}>
                     Q. {question}
                 </Text>
             </View>
