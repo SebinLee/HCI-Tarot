@@ -6,19 +6,45 @@ import {
     ScrollView,
     FlatList,
     TouchableOpacity,
+    Alert,
 } from "react-native";
 import TarotCard, { TarotCardType } from "../../design/TarotCard";
 import { Text, TextType } from "../../design/Text";
 import { NavigationPropEnum } from "../../design/layout/LayoutInterface";
 import Chip, { ChipContainer } from "../../design/Chip";
 import Color from "../../design/Color";
+import GetTarotDictionary from "../../library/tarotDict/GetTarotDictionary";
+import MarkdownText from "../../design/MarkdownText";
 
-export default function Dictionary() {
+export default function Dictionary({ navigation }) {
+    const [tarotDict, setTarotDict] = useState({});
     const [selectedCard, setSelectedCard] = useState(0);
     const [selectedType, setSelectedType] = useState("Major");
     const [menuIndex, setMenuIndex] = useState({ start: 0, end: 21 });
     const listRef = useRef(null);
     const screenWidth = Dimensions.get("screen").width;
+
+    useEffect(() => {
+        GetTarotDictionary()
+            .then((value) => {
+                //@ts-ignore
+                setTarotDict(value);
+            })
+            .catch(() => {
+                Alert.alert(
+                    "Error",
+                    "서버와의 통신 중 오류가 발생했습니다. 다시 시도해주세요",
+                    [
+                        {
+                            text: "OK",
+                            onPress: () => {
+                                navigation.goBack();
+                            },
+                        },
+                    ],
+                );
+            });
+    }, []);
 
     useEffect(() => {
         switch (selectedType) {
@@ -83,46 +109,26 @@ export default function Dictionary() {
                         (value, index) =>
                             index >= menuIndex.start && index <= menuIndex.end,
                     )}
-                    style={{ width: screenWidth * 0.3 }}
+                    style={{ width: screenWidth * 0.25 }}
                     showsVerticalScrollIndicator={false}
-                    contentContainerStyle={{ width: screenWidth * 0.3 }}
+                    contentContainerStyle={{ width: screenWidth * 0.26 }}
                     renderItem={({ item, index }) => (
-                        <TouchableOpacity
+                        <DictionaryVerticalButton
                             onPress={() =>
                                 setSelectedCard(index + menuIndex.start)
                             }
-                        >
-                            <View
-                                style={{
-                                    paddingVertical: 20,
-                                    paddingHorizontal: 10,
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    backgroundColor:
-                                        index + menuIndex.start === selectedCard
-                                            ? "#5DB07599"
-                                            : "#5DB07544",
-                                }}
-                            >
-                                <Text
-                                    style={{ textAlign: "center" }}
-                                    color={
-                                        index + menuIndex.start === selectedCard
-                                            ? Color.White
-                                            : Color.Primary
-                                    }
-                                >
-                                    {item.card}
-                                </Text>
-                            </View>
-                        </TouchableOpacity>
+                            selected={index + menuIndex.start === selectedCard}
+                            text={item.card}
+                        />
                     )}
                 />
-                <View
-                    style={{
+                <ScrollView
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={{
                         width: screenWidth * 0.7,
-                        paddingHorizontal: 10,
+                        paddingHorizontal: 20,
                         alignItems: "center",
+                        paddingBottom: 100,
                     }}
                 >
                     <Text type={TextType.H1}>
@@ -134,11 +140,57 @@ export default function Dictionary() {
                             size={Dimensions.get("screen").height * 0.25}
                         />
                     </View>
-                    <Text>
-                        asdflkajsdfl;kasjd;flkjasdfl;kjasd;flkjasdf;lkjasdfl;kjasdfl;kjasdfl;kasjdfl;kjasdfl;kasjdfl;kasjdfl;kasjdfl;askjdfl;kasjdfl;aksdfjl;kj
-                    </Text>
-                </View>
+                    <DictionaryContent
+                        title="설명"
+                        content={tarotDict[selectedCard]?.description}
+                    />
+                    <DictionaryContent
+                        title="키워드"
+                        content={tarotDict[selectedCard]?.keyword}
+                    />
+                    <DictionaryContent
+                        title="심볼"
+                        content={tarotDict[selectedCard]?.symbol}
+                    />
+                </ScrollView>
             </View>
         </Screen>
     );
 }
+
+const DictionaryVerticalButton = ({ onPress, selected, text }) => (
+    <TouchableOpacity onPress={onPress}>
+        <View
+            style={{
+                paddingVertical: 20,
+                paddingHorizontal: 10,
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: selected ? "#5DB07599" : "#5DB07544",
+            }}
+        >
+            <Text
+                type={TextType.Body2}
+                style={{ textAlign: "center" }}
+                color={selected ? Color.White : Color.Primary}
+            >
+                {text}
+            </Text>
+        </View>
+    </TouchableOpacity>
+);
+
+const DictionaryContent = ({ title, content }) =>
+    content && (
+        <View
+            style={{
+                marginVertical: 10,
+                paddingBottom: 10,
+                borderColor: Color.Primary,
+                borderBottomWidth: 0.5,
+            }}
+        >
+            <Text type={TextType.H2}>{title}</Text>
+            <MarkdownText text={content} />
+        </View>
+    );
