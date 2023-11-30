@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Dimensions, ScrollView, StyleSheet, View } from "react-native";
+import { Alert, Dimensions, ScrollView, View } from "react-native";
+import FastImage from "react-native-fast-image";
 import Screen from "../../design/Screen";
+import MarkdownText from "../../design/MarkdownText";
 import DisplayTarotCard from "../../design/dailyReading/DisplayTarotCard";
 import GetTarotStoryData from "../../library/tarotStory/GetTarotStoryData";
-import Markdown from "react-native-markdown-display";
-import Color from "../../design/Color";
-import FastImage from "react-native-fast-image";
 
 export default function TarotStoryDetail({ navigation, route }) {
     const { type, contentTitle } = route.params;
@@ -62,19 +61,9 @@ export default function TarotStoryDetail({ navigation, route }) {
                 )}
                 <DisplayTarotCard index={content.index} />
                 <View style={{ marginVertical: 20 }}>
-                    <Markdown style={style}>
-                        {content.content.replace(/\\n/g, "\n\n").trim()}
-                    </Markdown>
+                    <MarkdownText text={content.content} />
                 </View>
             </ScrollView>
         </Screen>
     );
 }
-
-const style = StyleSheet.create({
-    text: {
-        fontSize: 16,
-        lineHeight: 24,
-        color: Color.Primary,
-    },
-});
