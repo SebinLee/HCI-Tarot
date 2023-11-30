@@ -1,11 +1,13 @@
 import React, { useRef, useState } from "react";
 import { Dimensions, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Icon } from "@ui-kitten/components";
 import Color from "../../design/Color";
 import Screen from "../../design/Screen";
 import Modal from "../../design/Modal";
 import Button from "../../design/Button";
 import { Text } from "../../design/Text";
 import { ButtonSize } from "../../design/button/ButtonInterface";
+import { NavigationPropEnum } from "../../design/layout/LayoutInterface";
 import TarotStoryDecorations, {
     StoryRoadItemProp,
 } from "../../design/tarotStory/TarotStoryDecorations";
@@ -22,8 +24,6 @@ import TreeDisabled from "../../design/assets/tarotStory/I_Tree_Disabled.svg";
 import Wand from "../../design/assets/tarotStory/I_Wand.svg";
 //@ts-ignore
 import WandDisabled from "../../design/assets/tarotStory/I_Wand_Disabled.svg";
-import { Icon } from "@ui-kitten/components";
-import { NavigationPropEnum } from "../../design/layout/LayoutInterface";
 
 const contents = [
     "산책로 입구",
@@ -35,176 +35,71 @@ export default function TarotStory({ navigation }) {
     const [index, setIndex] = useState(0);
     const [modalVisible, setModalVisible] = useState(false);
 
-    const Story = useRef<StoryRoadItemProp[]>([
-        {
-            text: "Tarot Deck",
+    const Story = useRef<StoryRoadItemProp[]>(
+        [
+            { text: "Tarot Deck", disabled: false },
+            { text: "Major & Minor", disabled: false },
+            { text: "Suit", disabled: false },
+            { text: "Pip & Court Card", disabled: true },
+            { text: "Spread", disabled: true },
+            { text: "Finish", disabled: true },
+        ].map(({ text, disabled }) => ({
+            text,
+            disabled,
             onPress: () => {
-                navigation.push("TarotStoryDetail");
+                navigation.push("TarotStoryDetail", {
+                    type: "overview",
+                    contentTitle: text,
+                });
             },
-            disabled: false,
-            Decoration: Flag,
-            DisabledDecoration: Flag,
-        },
-        {
-            text: "Major & Minor",
-            onPress: () => {
-                navigation.push("TarotStoryDetail");
-            },
-            disabled: false,
-            Decoration: Flag,
-            DisabledDecoration: FlagDisabled,
-        },
-        {
-            text: "Suit",
-            onPress: () => {
-                navigation.push("TarotStoryDetail");
-            },
-            disabled: true,
             Decoration: Flag,
             DisabledDecoration: FlagDisabled,
-        },
-        {
-            text: "Pip & Court Card",
-            onPress: () => {
-                navigation.push("TarotStoryDetail");
-            },
-            disabled: true,
-            Decoration: Flag,
-            DisabledDecoration: FlagDisabled,
-        },
-        {
-            text: "Spread",
-            onPress: () => {
-                navigation.push("TarotStoryDetail");
-            },
-            disabled: true,
-            Decoration: Flag,
-            DisabledDecoration: FlagDisabled,
-        },
-        {
-            text: "Finish",
-            onPress: () => {
-                navigation.push("TarotStoryDetail");
-            },
-            disabled: true,
-            Decoration: Flag,
-            DisabledDecoration: FlagDisabled,
-        },
-    ]);
+        })),
+    );
 
-    const Major = useRef<StoryRoadItemProp[]>([
-        {
-            text: "The Fool",
+    const Major = useRef<StoryRoadItemProp[]>(
+        [
+            { text: "The Fool", disabled: false },
+            { text: "The Magician", disabled: false },
+            { text: "The High Priestess", disabled: false },
+            { text: "The Empress", disabled: true },
+            { text: "The Emperor", disabled: true },
+            { text: "The Hierophant", disabled: true },
+        ].map(({ text, disabled }) => ({
+            text,
+            disabled,
             onPress: () => {
-                navigation.push("TarotStoryDetail");
+                navigation.push("TarotStoryDetail", {
+                    type: "major",
+                    contentTitle: text,
+                });
             },
-            disabled: false,
             Decoration: Tree,
             DisabledDecoration: TreeDisabled,
-        },
-        {
-            text: "The Magician",
-            onPress: () => {
-                navigation.push("TarotStoryDetail");
-            },
-            disabled: false,
-            Decoration: Tree,
-            DisabledDecoration: TreeDisabled,
-        },
-        {
-            text: "The High Priestess",
-            onPress: () => {
-                navigation.push("TarotStoryDetail");
-            },
-            disabled: false,
-            Decoration: Tree,
-            DisabledDecoration: TreeDisabled,
-        },
-        {
-            text: "The Empress",
-            onPress: () => {
-                navigation.push("TarotStoryDetail");
-            },
-            disabled: true,
-            Decoration: Tree,
-            DisabledDecoration: TreeDisabled,
-        },
-        {
-            text: "The Emperor",
-            onPress: () => {
-                navigation.push("TarotStoryDetail");
-            },
-            disabled: true,
-            Decoration: Tree,
-            DisabledDecoration: TreeDisabled,
-        },
-        {
-            text: "The Hierophant",
-            onPress: () => {
-                navigation.push("TarotStoryDetail");
-            },
-            disabled: true,
-            Decoration: Tree,
-            DisabledDecoration: TreeDisabled,
-        },
-    ]);
+        })),
+    );
 
-    const MinorWand = useRef<StoryRoadItemProp[]>([
-        {
-            text: "King of Wands",
+    const MinorWand = useRef<StoryRoadItemProp[]>(
+        [
+            { text: "King of Wands", disabled: false },
+            { text: "Ace of Wands", disabled: false },
+            { text: "II of Wands", disabled: false },
+            { text: "III of Wands", disabled: true },
+            { text: "IV of Wands", disabled: true },
+            { text: "V of Wands", disabled: true },
+        ].map(({ text, disabled }) => ({
+            text,
+            disabled,
             onPress: () => {
-                navigation.push("TarotStoryDetail");
+                navigation.push("TarotStoryDetail", {
+                    type: "minor-wand",
+                    contentTitle: text,
+                });
             },
-            disabled: false,
             Decoration: Wand,
             DisabledDecoration: WandDisabled,
-        },
-        {
-            text: "Ace of Wands",
-            onPress: () => {
-                navigation.push("TarotStoryDetail");
-            },
-            disabled: false,
-            Decoration: Wand,
-            DisabledDecoration: WandDisabled,
-        },
-        {
-            text: "II of Wands",
-            onPress: () => {
-                navigation.push("TarotStoryDetail");
-            },
-            disabled: false,
-            Decoration: Wand,
-            DisabledDecoration: WandDisabled,
-        },
-        {
-            text: "III of Wands",
-            onPress: () => {
-                navigation.push("TarotStoryDetail");
-            },
-            disabled: true,
-            Decoration: Wand,
-            DisabledDecoration: WandDisabled,
-        },
-        {
-            text: "IV of Wands",
-            onPress: () => {
-                navigation.push("TarotStoryDetail");
-            },
-            disabled: true,
-            Decoration: Flag,
-            DisabledDecoration: FlagDisabled,
-        },
-        {
-            text: "V of Wands",
-            onPress: () => {
-                navigation.push("TarotStoryDetail");
-            },
-            disabled: true,
-            Decoration: Wand,
-            DisabledDecoration: WandDisabled,
-        },
-    ]);
+        })),
+    );
 
     const data = useRef([Story.current, Major.current, MinorWand.current]);
 

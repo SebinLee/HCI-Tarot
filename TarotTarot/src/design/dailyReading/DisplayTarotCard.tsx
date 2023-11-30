@@ -4,6 +4,8 @@ import { Text, TextType } from "../Text";
 import Color from "../Color";
 
 export default function DisplayTarotCard({ index }) {
+    if (index < 0 || TarotCardType.length <= index) return null;
+
     return (
         <View style={{ marginVertical: 5, alignItems: "center" }}>
             <TarotCard
