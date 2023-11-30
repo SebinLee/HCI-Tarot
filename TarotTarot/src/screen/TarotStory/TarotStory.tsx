@@ -39,7 +39,7 @@ export default function TarotStory({ navigation }) {
         [
             { text: "Tarot Deck", disabled: false },
             { text: "Major & Minor", disabled: false },
-            { text: "Suit", disabled: false },
+            { text: "Suit", disabled: true },
             { text: "Pip & Court Card", disabled: true },
             { text: "Spread", disabled: true },
             { text: "Finish", disabled: true },
