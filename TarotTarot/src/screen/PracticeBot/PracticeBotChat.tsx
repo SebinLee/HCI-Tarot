@@ -94,11 +94,7 @@ export default function PracticeBotChat({ navigation, route }) {
     };
 
     return (
-        <Screen
-            title="Chats"
-            horizontalPadding={false}
-            navigationLeftProp={NavigationPropEnum.hide}
-        >
+        <Screen title="Chats" horizontalPadding={false}>
             <ChatBase
                 chips={bottomChips.current}
                 showBottomAccessory={showBottomAcc}
