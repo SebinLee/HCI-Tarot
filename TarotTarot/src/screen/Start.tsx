@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Dimensions, TouchableOpacity } from "react-native";
+import { Dimensions, TouchableOpacity, View } from "react-native";
 import { NavigationPropEnum } from "../design/layout/LayoutInterface";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import auth from "@react-native-firebase/auth";
@@ -10,6 +10,8 @@ import GoogleAuth from "../design/assets/auth-google.svg";
 import { CommonActions } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { storeUserInfo } from "../library/redux/UserInfoReducer";
+import FastImage from "react-native-fast-image";
+import { Text, TextType } from "../design/Text";
 
 const buttonWidth = Math.round(Dimensions.get("screen").width * 0.85);
 
@@ -71,29 +73,38 @@ export default function Start({ navigation }) {
     }
 
     return (
-        <Screen
-            title="test"
-            navigationLeftProp={NavigationPropEnum.back}
-            navigationRightProp={NavigationPropEnum.hide}
-            onRightPropPress={() => {
-                console.log("Testtest");
-            }}
-        >
-            <TouchableOpacity
-                style={{
-                    margin: 5,
-                    alignItems: "center",
-                    justifyContent: "center",
-                }}
-                onPress={onGoogleButtonPress}
-            >
-                <GoogleAuth
+        <Screen hideNavigationBar={true}>
+            <View style={{ flex: 1, justifyContent: "space-between" }}>
+                <View style={{ alignItems: "center", marginVertical: 50 }}>
+                    <FastImage
+                        source={require("../design/assets/logo-primary.png")}
+                        style={{
+                            width: Dimensions.get("screen").width * 0.5,
+                            height: Dimensions.get("screen").width * 0.5,
+                        }}
+                    />
+                    <Text type={TextType.H1}>타롯타롯: HCI Prototype</Text>
+                </View>
+
+                <TouchableOpacity
                     style={{
-                        width: buttonWidth,
-                        height: buttonWidth * 0.15,
+                        margin: 5,
+                        alignItems: "center",
+                        justifyContent: "center",
+                        borderWidth: 0.5,
+                        borderColor: "#33333333",
+                        borderRadius: 10,
                     }}
-                />
-            </TouchableOpacity>
+                    onPress={onGoogleButtonPress}
+                >
+                    <GoogleAuth
+                        style={{
+                            width: buttonWidth,
+                            height: buttonWidth * 0.15,
+                        }}
+                    />
+                </TouchableOpacity>
+            </View>
         </Screen>
     );
 }
