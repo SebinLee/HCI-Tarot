@@ -39,7 +39,10 @@ export default function MainContent() {
                     ...commonScreenOption,
                     title: "데일리 리딩",
                     tabBarIcon: ({ focused }) => (
-                        <DailyReadingIcon style={{ width: 25, height: 25 }} />
+                        <DailyReadingIcon
+                            style={{ width: 25, height: 25 }}
+                            color={focused ? Color.Primary : Color.Gray}
+                        />
                     ),
                 }}
             />

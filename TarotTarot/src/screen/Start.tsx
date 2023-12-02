@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Dimensions, TouchableOpacity } from "react-native";
 import { NavigationPropEnum } from "../design/layout/LayoutInterface";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
@@ -7,13 +7,14 @@ import Screen from "../design/Screen";
 
 //@ts-ignore
 import GoogleAuth from "../design/assets/auth-google.svg";
+import { CommonActions } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { storeUserInfo } from "../library/redux/UserInfoReducer";
 
 const buttonWidth = Math.round(Dimensions.get("screen").width * 0.85);
 
-export default function Start() {
-    const [text, setText] = useState("");
-    const [visible, setVisible] = useState(false);
-    const [selected, setSelected] = useState(false);
+export default function Start({ navigation }) {
+    const dispatch = useDispatch();
 
     useEffect(() => {
         GoogleSignin.configure({
@@ -21,6 +22,37 @@ export default function Start() {
                 "749688606501-frpptri8ioiiapche8fk50nnit3p4bs5.apps.googleusercontent.com",
         });
     }, []);
+
+    // Handle firebase Auth
+    const onAuthStateChanged = (user: any) => {
+        if (user) {
+            navigation.dispatch(
+                CommonActions.reset({
+                    index: 1,
+                    routes: [
+                        {
+                            name: "MainContent",
+                            params: { routeParam: "front" },
+                        },
+                    ],
+                }),
+            );
+
+            dispatch(
+                storeUserInfo({
+                    id: user.uid,
+                    username: user.displayName,
+                    profilePic: user.photoURL,
+                    createdAt: user.metadata.creationTime,
+                }),
+            );
+        }
+    };
+
+    useEffect(() => {
+        const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+        return subscriber;
+    });
 
     async function onGoogleButtonPress() {
         // Check if your device supports Google Play
