@@ -1,14 +1,14 @@
 import { IMessage } from "react-native-gifted-chat";
-import { CommonActions } from "@react-navigation/native";
 import { ChatInputChipProps } from "../../design/chat/ChatInterface";
 import { ServerMessages } from "./PracticeBotInterface";
 import { UserInfo } from "../redux/UserInfoReducer";
 import CreateMessage from "./CreateMessage";
-import AppendMessage from "./AppendMessage";
+import AppendServerMessage from "./AppendServerMessage";
 
 export default function ParseChips(
     data: ServerMessages,
     userInfo: UserInfo,
+    botUserInfo: { _id: string; name: string; avatar: string },
     setContentRoute: React.Dispatch<React.SetStateAction<string>>,
     setMessage: React.Dispatch<React.SetStateAction<IMessage[]>>,
     setShowChips: React.Dispatch<React.SetStateAction<boolean>>,
@@ -47,7 +47,8 @@ export default function ParseChips(
                 else {
                     setContentRoute(chip.route);
                     if (chip.route !== "draw")
-                        AppendMessage(
+                        AppendServerMessage(
+                            botUserInfo,
                             data[chip.route],
                             setMessage,
                             setShowChips,

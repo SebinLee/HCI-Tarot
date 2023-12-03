@@ -10,10 +10,15 @@ import { useAppSelector } from "../../library/redux/ReduxStore";
 import WritePracticeBotAnswer from "../../library/firebase/WritePracticeBotAnswer";
 import GetPracticeBotData from "../../library/firebase/GetPracticeBotData";
 import CreateMessage from "../../library/practiceBot/CreateMessage";
-import AppendMessage from "../../library/practiceBot/AppendMessage";
+import AppendServerMessage from "../../library/practiceBot/AppendServerMessage";
 import ParseChips from "../../library/practiceBot/ParseChip";
 
 export default function PracticeBotChat({ navigation, route }) {
+    const botUserInfo = useRef({
+        _id: "system",
+        name: "bot",
+        avatar: "",
+    });
     const bottomChips = useRef<Record<string, ChatInputChipProps[]>>({});
     const userInfo = useAppSelector((state) => state.userInfo);
 
@@ -31,17 +36,30 @@ export default function PracticeBotChat({ navigation, route }) {
         console.log(route.params);
         if (route?.params?.id) {
             GetPracticeBotData(route.params.id).then((value) => {
-                const { tarotCards, data } = value;
+                const { tarotCards, data, profilePic } = value;
+
+                botUserInfo.current = {
+                    ...botUserInfo.current,
+                    avatar: profilePic,
+                };
+
                 bottomChips.current = ParseChips(
                     data,
                     userInfo,
+                    botUserInfo.current,
                     setContentRoute,
                     setMessage,
                     setShowBottomAcc,
                     navigation,
                 );
                 setServerData({ tarotCards, data });
-                AppendMessage(data[contentRoute], setMessage, setShowBottomAcc);
+
+                AppendServerMessage(
+                    botUserInfo.current,
+                    data[contentRoute],
+                    setMessage,
+                    setShowBottomAcc,
+                );
             });
         }
     }, []);
@@ -69,7 +87,8 @@ export default function PracticeBotChat({ navigation, route }) {
                 ).then(() => {
                     setShowBottomAcc(false);
                     setContentRoute("finish");
-                    AppendMessage(
+                    AppendServerMessage(
+                        botUserInfo.current,
                         serverData.data["finish"],
                         setMessage,
                         setShowBottomAcc,

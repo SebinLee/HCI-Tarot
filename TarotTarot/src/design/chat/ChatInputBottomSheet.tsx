@@ -4,6 +4,7 @@ import {
     Keyboard,
     StyleSheet,
     TouchableOpacity,
+    ScrollView,
 } from "react-native";
 import React, {
     useCallback,
@@ -82,7 +83,13 @@ const ChatInputBottomSheet = ({ tarots, onPressSend }: ChatInputTarotProps) => {
                     />
                 </TouchableOpacity>
             </View>
-            <View style={{ flex: 1, paddingVertical: 5 }}>
+            <ScrollView
+                style={{
+                    flex: 1,
+                    paddingVertical: 5,
+                    marginRight: Dimensions.get("window").width * 0.05,
+                }}
+            >
                 <Text
                     type={TextType.H1}
                     color={Color.Primary_dark}
@@ -90,7 +97,7 @@ const ChatInputBottomSheet = ({ tarots, onPressSend }: ChatInputTarotProps) => {
                 >
                     {TarotCardType[tarot.index].card}
                 </Text>
-                <View style={{ flex: 3 }}>
+                <View style={{ flex: 3, marginTop: 20, marginBottom: 10 }}>
                     <Text
                         type={TextType.Body1}
                         color={Color.Primary_dark}
@@ -98,9 +105,11 @@ const ChatInputBottomSheet = ({ tarots, onPressSend }: ChatInputTarotProps) => {
                     >
                         {tarot.topic} 키워드
                     </Text>
-                    <Text color={Color.Primary_dark}>{tarot.keywords}</Text>
+                    <Text color={Color.Primary_dark} type={TextType.Body2}>
+                        {tarot.keywords}
+                    </Text>
                 </View>
-            </View>
+            </ScrollView>
         </>
     );
 
