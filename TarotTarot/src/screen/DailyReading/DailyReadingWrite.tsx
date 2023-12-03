@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
-import { Alert, Dimensions, ScrollView, TextInput } from "react-native";
+import { Alert, Dimensions, TextInput } from "react-native";
+import { KeyboardAvoidingScrollView } from "react-native-keyboard-avoiding-scroll-view";
 
 import Button from "../../design/Button";
 import Screen from "../../design/Screen";
@@ -21,7 +22,10 @@ export default function DailyReadingWriting({ navigation }) {
 
     return (
         <Screen title="데일리 리딩">
-            <ScrollView>
+            <KeyboardAvoidingScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{ paddingBottom: 60 }}
+            >
                 <DateTitle {...dateData.current} />
                 <DisplayTarotCard index={cardIndex.current} />
                 <TextInput
@@ -60,7 +64,7 @@ export default function DailyReadingWriting({ navigation }) {
                             });
                     }}
                 />
-            </ScrollView>
+            </KeyboardAvoidingScrollView>
         </Screen>
     );
 }
