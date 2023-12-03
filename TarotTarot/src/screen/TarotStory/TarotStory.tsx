@@ -25,11 +25,7 @@ import Wand from "../../design/assets/tarotStory/I_Wand.svg";
 //@ts-ignore
 import WandDisabled from "../../design/assets/tarotStory/I_Wand_Disabled.svg";
 
-const contents = [
-    "산책로 입구",
-    "메이저 카드 산책로",
-    "마이너카드 완드 산책로",
-];
+const contents = ["산책로 입구", "메이저카드 산책로", "마이너카드 완드 산책로"];
 
 export default function TarotStory({ navigation }) {
     const [index, setIndex] = useState(0);
@@ -84,7 +80,7 @@ export default function TarotStory({ navigation }) {
             { text: "King of Wands", disabled: false },
             { text: "Ace of Wands", disabled: false },
             { text: "II of Wands", disabled: false },
-            { text: "III of Wands", disabled: true },
+            { text: "III of Wands", disabled: false },
             { text: "IV of Wands", disabled: true },
             { text: "V of Wands", disabled: true },
         ].map(({ text, disabled }) => ({

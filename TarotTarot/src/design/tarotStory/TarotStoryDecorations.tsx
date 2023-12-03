@@ -47,7 +47,7 @@ export default function TarotStoryDecorations({ data }: StoryRoadItemProps) {
                 height: actualHeight.current * 0.08,
             },
             item_text_odd: {
-                marginLeft: actualHeight.current * 0.08 * 0.6,
+                marginLeft: actualHeight.current * 0.08 * 0.8,
                 marginTop: actualHeight.current * 0.08 - 20,
             },
             item_text_even: {
