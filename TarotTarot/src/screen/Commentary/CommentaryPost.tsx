@@ -36,7 +36,6 @@ export default function CommentaryPost({ route }) {
                     <CommentaryAnswer
                         {...data.item}
                         key={data.item.id}
-                        myUserID={id}
                         tarotCards={params.data.tarotCards}
                     />
                 )}
