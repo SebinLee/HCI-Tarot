@@ -30,7 +30,7 @@ export default function Modal({
                 <Text
                     type={TextType.H1}
                     style={{
-                        fontWeight: "500",
+                        fontSize: 25,
                         textAlign: "center",
                         marginBottom: 10,
                     }}

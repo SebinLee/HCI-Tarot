@@ -140,13 +140,13 @@ export default function PracticeBotChat({ navigation, route }) {
                 tarots={serverData.tarotCards}
             />
             <Modal
-                title="Tip"
+                title="TIP"
                 visible={modalVisible}
                 setVisible={setModalVisible}
             >
                 <ScrollView
                     style={{
-                        height: Dimensions.get("screen").height * 0.5,
+                        height: Dimensions.get("screen").height * 0.6,
                         marginTop: 10,
                     }}
                     showsVerticalScrollIndicator={false}
