@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Screen from "../../design/Screen";
 import { FlatList } from "react-native";
-import GetUserCommentary from "../../library/firebase/GetUserCommentary";
 import CommentaryAnswer from "../../design/commentary/CommentaryAnswer";
 import CommentaryQuestion from "../../design/commentary/CommentaryQuestion";
+import GetUserCommentary from "../../library/firebase/GetUserCommentary";
+import SortCommentaryData from "../../library/commentary/SortCommentaryData";
+import { useAppSelector } from "../../library/redux/ReduxStore";
 
 export default function CommentaryPost({ route }) {
     const { params } = route;
+    const { id } = useAppSelector((state) => state.userInfo);
     const [userComment, setUserComment] = useState([]);
 
     useEffect(() => {
-        console.log(params.data);
         GetUserCommentary(params.data.id).then((data) => {
-            setUserComment([...data]);
+            setUserComment([...SortCommentaryData(data, id)]);
         });
     }, []);
 
@@ -31,7 +33,12 @@ export default function CommentaryPost({ route }) {
                     />
                 )}
                 renderItem={(data) => (
-                    <CommentaryAnswer {...data.item} key={data.item.id} />
+                    <CommentaryAnswer
+                        {...data.item}
+                        key={data.item.id}
+                        myUserID={id}
+                        tarotCards={params.data.tarotCards}
+                    />
                 )}
             />
         </Screen>

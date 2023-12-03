@@ -47,7 +47,7 @@ export default function CommentaryQuestion({
                 ))}
             </View>
             <Text
-                style={{ marginVertical: 10 }}
+                style={{ marginVertical: 20, fontSize: 25 }}
                 color={Color.Primary}
                 type={TextType.H1}
             >

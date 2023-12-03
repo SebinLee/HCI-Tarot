@@ -1,5 +1,4 @@
 import firestore from "@react-native-firebase/firestore";
-import { Alert } from "react-native";
 
 export default async function WritePracticeBotAnswer(
     docID = "",
@@ -14,7 +13,7 @@ export default async function WritePracticeBotAnswer(
     // Submit user answer
     await questionDoc
         .collection("userAnswer")
-        .add({ answer, profilePic, username });
+        .add({ answer, profilePic, userID, username, createdAt: Date.now() });
 
     // Update answered user
     await questionDoc.update({

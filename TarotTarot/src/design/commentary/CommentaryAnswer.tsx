@@ -3,9 +3,10 @@ import { StyleSheet, View } from "react-native";
 import FastImage from "react-native-fast-image";
 import { Text, TextType } from "../Text";
 import Color from "../Color";
+import { TarotCardType } from "../TarotCard";
 
 export default function CommentaryListElement({ ...props }) {
-    const { answer } = props;
+    const { answer, userID, myUserID, tarotCards } = props;
 
     return (
         <View style={style.container}>
@@ -22,10 +23,28 @@ export default function CommentaryListElement({ ...props }) {
                 >
                     {props.username}
                 </Text>
+                {userID === myUserID && (
+                    <View
+                        style={{
+                            paddingHorizontal: 8,
+                            backgroundColor: Color.Primary,
+                            paddingVertical: 3,
+                            marginLeft: 6,
+                            borderRadius: 10,
+                        }}
+                    >
+                        <Text type={TextType.Caption} color={Color.White}>
+                            내 답변
+                        </Text>
+                    </View>
+                )}
             </View>
             <View style={style.answerContainer}>
                 {answer.map((content, index) => (
-                    <Answer title={`카드 ${index + 1}`} content={content} />
+                    <Answer
+                        title={TarotCardType[tarotCards[index].index].card}
+                        content={content}
+                    />
                 ))}
             </View>
         </View>
