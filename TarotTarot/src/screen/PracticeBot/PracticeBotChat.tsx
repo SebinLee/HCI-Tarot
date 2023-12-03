@@ -12,6 +12,9 @@ import GetPracticeBotData from "../../library/firebase/GetPracticeBotData";
 import CreateMessage from "../../library/practiceBot/CreateMessage";
 import AppendServerMessage from "../../library/practiceBot/AppendServerMessage";
 import ParseChips from "../../library/practiceBot/ParseChip";
+import Modal from "../../design/Modal";
+import MarkdownText from "../../design/MarkdownText";
+import { Dimensions, ScrollView } from "react-native";
 
 export default function PracticeBotChat({ navigation, route }) {
     const botUserInfo = useRef({
@@ -22,10 +25,12 @@ export default function PracticeBotChat({ navigation, route }) {
     const bottomChips = useRef<Record<string, ChatInputChipProps[]>>({});
     const userInfo = useAppSelector((state) => state.userInfo);
 
+    const [modalVisible, setModalVisible] = useState(false);
     const [contentRoute, setContentRoute] = useState<string>("entry");
     const [showBottomAcc, setShowBottomAcc] = useState<boolean>(false);
     const [message, setMessage] = useState<IMessage[]>([]);
     const [serverData, setServerData] = useState({
+        tip: "",
         tarotCards: [],
         data: {},
     });
@@ -36,7 +41,8 @@ export default function PracticeBotChat({ navigation, route }) {
         console.log(route.params);
         if (route?.params?.id) {
             GetPracticeBotData(route.params.id).then((value) => {
-                const { tarotCards, data, profilePic } = value;
+                console.log(value);
+                const { tarotCards, data, tip, profilePic } = value;
 
                 botUserInfo.current = {
                     ...botUserInfo.current,
@@ -52,7 +58,7 @@ export default function PracticeBotChat({ navigation, route }) {
                     setShowBottomAcc,
                     navigation,
                 );
-                setServerData({ tarotCards, data });
+                setServerData({ tarotCards, data, tip });
 
                 AppendServerMessage(
                     botUserInfo.current,
@@ -113,7 +119,18 @@ export default function PracticeBotChat({ navigation, route }) {
     };
 
     return (
-        <Screen title="Chats" horizontalPadding={false}>
+        <Screen
+            title="Chats"
+            horizontalPadding={false}
+            navigationRightProp={
+                serverData.tip
+                    ? NavigationPropEnum.info
+                    : NavigationPropEnum.hide
+            }
+            onRightPropPress={() => {
+                setModalVisible(true);
+            }}
+        >
             <ChatBase
                 chips={bottomChips.current}
                 showBottomAccessory={showBottomAcc}
@@ -122,6 +139,21 @@ export default function PracticeBotChat({ navigation, route }) {
                 message={message}
                 tarots={serverData.tarotCards}
             />
+            <Modal
+                title="Tip"
+                visible={modalVisible}
+                setVisible={setModalVisible}
+            >
+                <ScrollView
+                    style={{
+                        height: Dimensions.get("screen").height * 0.5,
+                        marginTop: 10,
+                    }}
+                    showsVerticalScrollIndicator={false}
+                >
+                    <MarkdownText text={serverData.tip} />
+                </ScrollView>
+            </Modal>
         </Screen>
     );
 }

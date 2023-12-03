@@ -29,4 +29,5 @@ export enum NavigationPropEnum {
     close,
     profile,
     submit,
+    info,
 }

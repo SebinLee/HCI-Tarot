@@ -54,6 +54,11 @@ export default function NavigationBarProp({ prop, color }: NavigationIconProp) {
                 />
             );
 
+        case NavigationPropEnum.info:
+            return (
+                <Icon name="info-outline" fill={color} style={styles.icon} />
+            );
+
         default:
             return null;
     }
