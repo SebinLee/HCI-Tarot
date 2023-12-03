@@ -1,33 +1,44 @@
-import React from "react";
-import Screen from "../../design/Screen";
+import React, { useEffect, useState } from "react";
 import { FlatList, TouchableOpacity, View } from "react-native";
-import { Text, TextType } from "../../design/Text";
 import FastImage from "react-native-fast-image";
+
 import Color from "../../design/Color";
-import GetAvailableQuestions from "../../library/firebase/GetAvailableQuestions";
-import { useAppSelector } from "../../library/redux/ReduxStore";
+import Screen from "../../design/Screen";
+import { Text, TextType } from "../../design/Text";
 import { NavigationPropEnum } from "../../design/layout/LayoutInterface";
+import { useAppSelector } from "../../library/redux/ReduxStore";
+
+import GetQuestions from "../../library/firebase/GetQuestions";
+import GetQuestionAvailable from "../../library/firebase/GetQuestionAvailable";
+import SortPracticeBotData from "../../library/practiceBot/SortPraticeBotData";
 
 export default function PracticeBot({ navigation }) {
     const { id } = useAppSelector((state) => state.userInfo);
+    const [questionData, setQuestionData] = useState([]);
+
+    useEffect(() => {
+        GetQuestions().then((value) => {
+            if (value) setQuestionData(SortPracticeBotData(value));
+        });
+    }, []);
 
     return (
         <Screen title="연습봇" navigationLeftProp={NavigationPropEnum.hide}>
             <FlatList
-                data={data}
+                data={questionData}
                 renderItem={({ item, index }) => (
                     <Item
                         key={index}
-                        title={item.title}
-                        description={item.description}
+                        title={item?.question}
+                        description={item?.description}
+                        profilePic={item?.profilePic}
                         onPress={() => {
-                            GetAvailableQuestions(id, item.topic).then(
-                                (docId) => {
-                                    if (docId) {
+                            GetQuestionAvailable(id, item.docID).then(
+                                (result) => {
+                                    if (result === true)
                                         navigation.push("PracticeBotChat", {
-                                            id: docId,
+                                            id: item.docID,
                                         });
-                                    }
                                 },
                             );
                         }}
@@ -38,19 +49,24 @@ export default function PracticeBot({ navigation }) {
     );
 }
 
-const Item = ({ title, description, onPress }) => (
+const Item = ({
+    title = "",
+    description = "",
+    profilePic = "",
+    onPress = () => {},
+}) => (
     <TouchableOpacity
         style={{ height: 80, justifyContent: "center" }}
         onPress={onPress}
     >
         <View style={{ flexDirection: "row" }}>
-            <View style={{ marginHorizontal: 10 }}>
+            <View style={{ marginRight: 15 }}>
                 <FastImage
-                    source={require("../../design/assets/logo-primary.png")}
+                    source={{ uri: profilePic }}
                     style={{
-                        width: 40,
-                        height: 40,
-                        borderRadius: 20,
+                        width: 50,
+                        height: 50,
+                        borderRadius: 30,
                         backgroundColor: Color.White,
                     }}
                     resizeMode="contain"
@@ -59,31 +75,10 @@ const Item = ({ title, description, onPress }) => (
 
             <View style={{ flex: 1, justifyContent: "space-around" }}>
                 <Text type={TextType.H1}>{title}</Text>
-                <Text type={TextType.Caption}>{description}</Text>
+                <Text type={TextType.Caption} style={{ marginTop: 5 }}>
+                    {description}
+                </Text>
             </View>
         </View>
     </TouchableOpacity>
 );
-
-const data = [
-    {
-        topic: "튜토리얼",
-        title: "뉴비봇",
-        description: "튜토리얼",
-    },
-    {
-        topic: "연애운",
-        title: "연애상담",
-        description: "연애봇",
-    },
-    {
-        topic: "금전운",
-        title: "금전봇",
-        description: "금전상담",
-    },
-    {
-        topic: "학업운",
-        title: "학업봇",
-        description: "학업상담",
-    },
-];
