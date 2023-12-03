@@ -170,9 +170,9 @@ const DictionaryVerticalButton = ({ onPress, selected, text }) => (
             }}
         >
             <Text
-                type={TextType.Body2}
+                type={TextType.Caption}
                 style={{ textAlign: "center" }}
-                color={selected ? Color.White : Color.Primary}
+                color={selected ? Color.White : Color.Primary_dark}
             >
                 {text}
             </Text>
@@ -186,11 +186,13 @@ const DictionaryContent = ({ title, content }) =>
             style={{
                 marginVertical: 10,
                 paddingBottom: 10,
-                borderColor: Color.Primary,
+                borderColor: Color.Primary_dark,
                 borderBottomWidth: 0.5,
             }}
         >
-            <Text type={TextType.H2}>{title}</Text>
+            <Text type={TextType.H2} color={Color.Primary_dark}>
+                {title}
+            </Text>
             <MarkdownText text={content} />
         </View>
     );
